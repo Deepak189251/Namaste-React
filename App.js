@@ -1,8 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent= React.createElement("div", {id: `parent`},[
-              React.createElement("div", {id: `child1`}, [React.createElement("h1", {}, "This is h1 child1"), React.createElement("h2", {}, "This is a h2 from child1")]),
-              React.createElement("div", {id: `child2`}, [React.createElement("h1", {}, "This is h1 child2"), React.createElement("h2", {}, "This is a h2 from child2")])]);
-const root = ReactDOM.createRoot(document.querySelector("#root"));
-root.render(parent);
+// Creating element in createElement
+
+const heading = React.createElement(`h1`, {id: `heading`}, `Namaste React`);
+
+console.log(heading);
+
+// JSX is not HTML in js
+
+const jsxHeading = <h1 id="heading">Namaste React using JSX.</h1>
+
+console.log(jsxHeading)
+const root = ReactDOM.createRoot(document.getElementById(`root`));
+
+root.render(jsxHeading);
+
+
+
