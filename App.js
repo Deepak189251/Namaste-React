@@ -3,13 +3,20 @@ import ReactDOM from "react-dom/client";
 
 // Creating element in createElement
 
-const heading = React.createElement(`h1`, {id: `heading`}, `Namaste React CreateElement`);
-
+const heading = (
+    <h1>Namaste React CreateElement</h1>
+)
 console.log(heading);
 
 // Functional component "A basic js function which returns react element"
 
-const JsxHeading = () => <h1 id="heading">Namaste React using JSX.</h1>
+var  JsxHeading = () => (
+    <div>
+    <h1 id="heading">Namaste React using JSX.</h1>
+    <p>This is a component.</p>
+    {heading}
+    </div>
+ )
 
 console.log(JsxHeading)
 
@@ -22,7 +29,7 @@ const HeadingComponent = () => (
     
     <div id="container">
         
-        <JsxHeading />
+        {JsxHeading()}
         {heading}
         <h1>Namaste React using Functional component.</h1>
      </div>
