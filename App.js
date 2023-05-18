@@ -21,7 +21,7 @@ const jContainer = (
         <h3 className="title">This is jsx heading3</h3>
     </div>
     </>
-)
+);
 
 // Creating same with a functional component
 
@@ -35,7 +35,7 @@ const functionalContainer = () => (
         <h3 className="title">This is functional component heading3</h3>
      </div>
     </>
-)
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
