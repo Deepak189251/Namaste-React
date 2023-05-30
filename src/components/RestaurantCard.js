@@ -1,9 +1,9 @@
 import { restaurantLogoUrl } from "../utils/constant"
 
 const RestruantCard = (props) => {
-   // const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata.data
-   
-   const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata
+    const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata.data
+   console.log(name, deliveryTime, avgRating)
+  // const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata
     return (
        <div className="restruant-card">
           <img alt="restruant_logo" src={restaurantLogoUrl + cloudinaryImageId}/>

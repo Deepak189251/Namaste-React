@@ -4,7 +4,9 @@ import { useState } from "react"
 
 
 const Body = () => {
-   let filteredRestaurant = [
+   const [filteredRestaurant, setFilteredRestaurant] = useState(Data.cards)
+
+ /*  let filteredRestaurant = [
           { 
          "id": "356967",
          "name": "Green Park Restaurant",
@@ -62,7 +64,7 @@ const Body = () => {
             "deliveryTime": 27,
             "avgRating": "4.2",
          }
-]
+] */
 console.log(filteredRestaurant)
     return (
        <div className="body">
@@ -72,10 +74,10 @@ console.log(filteredRestaurant)
           </div>
           <div className="filtered-restaurant">
             <button className="filter-btn" onClick={() => {
-               filteredRestaurant = filteredRestaurant.filter((Restaurant) => (
-                  Restaurant.avgRating >= 4
+              const filteredList = filteredRestaurant.filter((Restaurant) => (
+                  Restaurant.data.avgRating >= 4
                ))
-               console.log(filteredRestaurant)
+               setFilteredRestaurant(filteredList);
             }}>Top Rated Restaurant</button>
           </div>
           <div className="restruant-container">
