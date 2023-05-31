@@ -2,7 +2,7 @@ import { restaurantLogoUrl } from "../utils/constant"
 
 const RestruantCard = (props) => {
     const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata.data
-   console.log(name, deliveryTime, avgRating)
+   
   // const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata
     return (
        <div className="restruant-card">
@@ -12,7 +12,7 @@ const RestruantCard = (props) => {
           <h5>{avgRating + " Stars"}</h5>
           <h5>{deliveryTime + " Mins"}</h5>
        </div>
-    )
+    )  
  }
  
  export default RestruantCard
