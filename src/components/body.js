@@ -82,10 +82,7 @@ console.log(filteredRestaurant)
           </div>
           <div className="restruant-container">
            {
-             /* Data.cards.map((Restaurant) => (
-                <RestruantCard key = {Restaurant.data.id} resdata = {Restaurant} />
-             )) */
-
+             
              filteredRestaurant?.map((Restaurant) => (
                <RestruantCard key = {Restaurant.id} resdata = {Restaurant} />
             ))
