@@ -18,7 +18,7 @@ const Applayout = () => {
       </div>
    )
 }
-
+console.log(Applayout())
 const root = ReactDOM.createRoot(document.getElementById(`root`));
 
 root.render(<Applayout/>); 

@@ -64,8 +64,8 @@ const Body = () => {
             "deliveryTime": 27,
             "avgRating": "4.2",
          }
-] */
-console.log(filteredRestaurant)
+] 
+console.log(filteredRestaurant) */
     return (
        <div className="body">
           <div className="search-element">
@@ -84,7 +84,7 @@ console.log(filteredRestaurant)
            {
              
              filteredRestaurant?.map((Restaurant) => (
-               <RestruantCard key = {Restaurant.id} resdata = {Restaurant} />
+               <RestruantCard key = {Restaurant.data.id} resdata = {Restaurant} />
             ))
 
            }

@@ -28,7 +28,7 @@ const jContainer = (
 
 const FunctionalContainer = () => (
     <>
-    {jContainer}
+    {jContainer}   
      <div id="funcontainer">
         <h1 className="title">This is functional component heading1</h1>
         <h2 className="title">This is functional component heading2</h2>
