@@ -1,85 +1,86 @@
 import RestruantCard from "./RestaurantCard"
-import Data from "../utils/mockData"
-import { useState } from "react"
+import Shimmer from "./Shimmer"
+import { useState, useEffect } from "react"
 
 
 const Body = () => {
-   const [filteredRestaurant, setFilteredRestaurant] = useState(Data.cards)
+   const [restaurantList, setRestaurantList] = useState([])
 
- /*  let filteredRestaurant = [
-          { 
-         "id": "356967",
-         "name": "Green Park Restaurant",
-         
-         "area": "Ranihat Colony",
-         
-         "cloudinaryImageId": "xwxj2kp7gk2ldyho0mwg",
-         "cuisines": [
-         "Street Food",
-         "Indian",
-         "Biryani"
-         ],
-         "costForTwo": 20000,
-         "deliveryTime": 27,
-         "city": "cuttack",
-         "deliveryTime": 27,
-         "avgRating": "3.9",
-         },
-         { 
-            "id": "356968",
-            "name": "Biriyani Box",
-            
-            "area": "Buxi Bazar",
-            
-            "cloudinaryImageId": "pfh6vbbujb4jnowbi6vx",
-            "cuisines": [
-               "Biryani",
-               "Kebabs",
-               "Desserts",
-               "Indian"
-               ],
-            "costForTwo": 20000,
-            "deliveryTime": 27,
-            "city": "cuttack",
-            "deliveryTime": 27,
-            "avgRating": "4.0",
-         },
-         { 
-            "id": "356969",
-            "name": "KFC",
-            
-            "area": "Badambadi",
-            
-            "cloudinaryImageId": "56c9ab92bd79745fd152a30fa2525426",
-            "cuisines": [
-               "Burgers",
-               "Biryani",
-               "American",
-               "Snacks",
-               "Fast Food"
-               ],
-            "costForTwo": 20000,
-            "deliveryTime": 27,
-            "city": "cuttack",
-            "deliveryTime": 27,
-            "avgRating": "4.2",
-         }
-] 
-console.log(filteredRestaurant) */
+   const [filteredRestaurant, setFilteredRestaurant] = useState([])
+
+   const [searchText, setSearchText] = useState("")
+  
+   useEffect(() => {
+      fetchData()
+      
+   },[]);
+
+
+
+       
+   const fetchData = async () => {
+       const data = await fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.462521&lng=85.8829895&page_type=DESKTOP_WEB_LISTING");
+       console.log(data)
+       const jsondata = await data.json()
+       
+       
+       setRestaurantList(jsondata?.data?.cards[2]?.data?.data?.cards)
+       setFilteredRestaurant(jsondata?.data?.cards[2]?.data?.data?.cards)
+   }  
+  
+
+
+
+  /* const fetchData =  () => {
+      const data =  fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.462521&lng=85.8829895&page_type=DESKTOP_WEB_LISTING");
+      data.then((res) => {
+        return res.json()
+      })
+      .then((res) => {
+         setRestaurantList(res?.data?.cards[2]?.data?.data?.cards)
+         setFilteredRestaurant(res?.data?.cards[2]?.data?.data?.cards)
+      })
+      .catch((error) => {
+         console.log(error)
+      })
+  }  
+*/
+
+ 
+   //   Conditional Rendering. 
+    
+   if(restaurantList.length === 0){
+      return <Shimmer/>
+   }
+   
+   console.log("body rendered"  )
+
+
+   
     return (
        <div className="body">
           <div className="search-element">
-            <input type="text" id="search-input"></input>
-            <button className="search-btn">Search</button>
-          </div>
-          <div className="filtered-restaurant">
+
+
             <button className="filter-btn" onClick={() => {
-              const filteredList = filteredRestaurant.filter((Restaurant) => (
+              const filteredList = restaurantList.filter((Restaurant) => (
                   Restaurant.data.avgRating >= 4
                ))
-               setFilteredRestaurant(filteredList);
+               setRestaurantList(filteredList);
             }}>Top Rated Restaurant</button>
+
+
+            <input type="text" id="search-input" value={searchText} onChange={(e) => {setSearchText(e.target.value)}}></input>
+            <button className="search-btn" onClick={() => {
+               const searchedRestaurant = restaurantList.filter((res)=> {
+                 return res.data.name.toLowerCase().includes(searchText.toLowerCase())
+               })
+               
+               setFilteredRestaurant(searchedRestaurant)
+               
+               }}>Search</button>
           </div>
+          
           <div className="restruant-container">
            {
              
