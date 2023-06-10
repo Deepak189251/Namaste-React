@@ -49,6 +49,10 @@
     padding: 10px;
 }
 
+.search-btn{
+  margin: 5px;
+}
+
 .restruant-card img {
    width: 180px;
    
@@ -56,4 +60,18 @@
 
 .filter-btn {
   margin: 10px;
+}
+
+.shimmer_container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 80px;
+}
+
+.shimmer_card{
+  width: 230px;
+  height: 315px;
+  background-color: gainsboro;
+  margin: 10px;
+  padding: 5px;
 }
