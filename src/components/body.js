@@ -20,43 +20,22 @@ const Body = () => {
        
    const fetchData = async () => {
        const data = await fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.462521&lng=85.8829895&page_type=DESKTOP_WEB_LISTING");
-       console.log(data)
        const jsondata = await data.json()
        
        
+      
+       
        setRestaurantList(jsondata?.data?.cards[2]?.data?.data?.cards)
        setFilteredRestaurant(jsondata?.data?.cards[2]?.data?.data?.cards)
+
    }  
-  
-
-
-
-  /* const fetchData =  () => {
-      const data =  fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.462521&lng=85.8829895&page_type=DESKTOP_WEB_LISTING");
-      data.then((res) => {
-        return res.json()
-      })
-      .then((res) => {
-         setRestaurantList(res?.data?.cards[2]?.data?.data?.cards)
-         setFilteredRestaurant(res?.data?.cards[2]?.data?.data?.cards)
-      })
-      .catch((error) => {
-         console.log(error)
-      })
-  }  
-*/
-
  
-   //   Conditional Rendering. 
+   
+//   Conditional Rendering. 
     
    if(restaurantList.length === 0){
       return <Shimmer/>
-   }
-   
-   console.log("body rendered"  )
-
-
-   
+   } 
     return (
        <div className="body">
           <div className="search-element">
@@ -66,7 +45,7 @@ const Body = () => {
               const filteredList = restaurantList.filter((Restaurant) => (
                   Restaurant.data.avgRating >= 4
                ))
-               setRestaurantList(filteredList);
+               setFilteredRestaurant(filteredList);
             }}>Top Rated Restaurant</button>
 
 
@@ -74,10 +53,8 @@ const Body = () => {
             <button className="search-btn" onClick={() => {
                const searchedRestaurant = restaurantList.filter((res)=> {
                  return res.data.name.toLowerCase().includes(searchText.toLowerCase())
-               })
-               
-               setFilteredRestaurant(searchedRestaurant)
-               
+               }) 
+               setFilteredRestaurant(searchedRestaurant) 
                }}>Search</button>
           </div>
           
