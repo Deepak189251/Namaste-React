@@ -17,6 +17,7 @@ const RestaurantMenu = () => {
     
     
     const fetchInfo = async () => {
+        // It is swiggy's original Api
         const data = await fetch(`https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.462521&lng=85.8829895&restaurantId=${resId}&submitAction=ENTER`);
       
         const resdata = await data.json()
@@ -38,11 +39,12 @@ const RestaurantMenu = () => {
                 <div className="heading">
                   <h5 className="menu-heading">{menuHeading}</h5>
                   <button onClick={() => setShow(!show)}>{show? "-" : "+"}</button>
-                </div>
+                </div> 
                 {show && <div className="answer"> {menu.map((res, index)=>{
                     return <MenuCard key= {index} response = {res.card.info}/>
                 })}</div>}
-              
+                 
+
              
                
                 
