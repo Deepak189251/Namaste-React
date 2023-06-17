@@ -17,7 +17,7 @@ const RestaurantMenu = () => {
     
     
     const fetchInfo = async () => {
-        // It is swiggy's original Api
+        // It is swiggy's original Api used in this app
         const data = await fetch(`https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.462521&lng=85.8829895&restaurantId=${resId}&submitAction=ENTER`);
       
         const resdata = await data.json()
