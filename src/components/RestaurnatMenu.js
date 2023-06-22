@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import MenuCard from "./Menu";
+import { menuApi } from "../utils/constant";
 const RestaurantMenu = () => {
    
     const [resInfo, setResInfo] = useState(null)
@@ -18,7 +19,7 @@ const RestaurantMenu = () => {
     
     const fetchInfo = async () => {
         // It is swiggy's original Api used in this app
-        const data = await fetch(`https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.462521&lng=85.8829895&restaurantId=${resId}&submitAction=ENTER`);
+        const data = await fetch(menuApi + resId);
       
         const resdata = await data.json()
        console.log(resdata)
