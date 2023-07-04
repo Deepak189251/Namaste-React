@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import MenuCard from "./Menu";
+import MenuSection from "./MenuSection";
 import { menuApi } from "../utils/constant";
 const RestaurantMenu = () => {
    
     const [resInfo, setResInfo] = useState(null)
     const [menu, setMenu] = useState([])
-    const [show, setShow] = useState(false);
-    const [menuHeading, setMenuHeading] = useState("")
+    
+    
     const {resId} = useParams();
    // console.log(resId)
 
@@ -26,8 +26,8 @@ const RestaurantMenu = () => {
         
 
        setResInfo(resdata?.data?.cards[0]?.card?.card?.info) ;
-       setMenu(resdata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards)
-       setMenuHeading(resdata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.title)
+       setMenu(resdata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+       
     }
     if(resInfo === null){
         return <Shimmer />
@@ -36,22 +36,19 @@ const RestaurantMenu = () => {
         <div className="res-menu">
             <h5>{resInfo.name}</h5>
             <h6>{resInfo.cuisines.join(", ")}</h6>
-            <section className="menu-container">
-                <div className="heading">
-                  <h5 className="menu-heading">{menuHeading}</h5>
-                  <button onClick={() => setShow(!show)}>{show? "-" : "+"}</button>
-                </div> 
-                {show && <div className="answer"> {menu.map((res, index)=>{
-                    return <MenuCard key= {index} response = {res.card.info}/>
-                })}</div>}
-                 
-
-             
-               
-                
-            </section>
+            {menu.map((res, index) => {
+                return <MenuSection key={index} response = {res?.card?.card}/>
+            })}
         </div> 
     )
 }
+/*
+{menu.map((res, index)=>{
+    return <MenuCard key= {index} response = {res.card.info}/>
+})} 
+
+
+       setMenu(resdata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards)
+       */
 
 export default RestaurantMenu

@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import { restaurantLogoUrl } from "../utils/constant"
 const MenuCard = (props) => {
  
@@ -23,7 +23,7 @@ const MenuCard = (props) => {
   <div>
      <h6>{name}</h6>
      <p>{price? "Rs"+ price/100 : "Rs"+defaultPrice/100}</p>
-     <img alt="restruant_logo" src={restaurantLogoUrl + imageId}/>
+     <img alt="product_image" src={restaurantLogoUrl + imageId}/>
      <p>{description}</p>
      <hr></hr>
    </div>
