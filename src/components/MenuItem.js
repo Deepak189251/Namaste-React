@@ -1,6 +1,6 @@
 
 import { restaurantLogoUrl } from "../utils/constant"
-const MenuCard = (props) => {
+const MenuItem = (props) => {
  
  const {name, imageId, price, ratings, description, defaultPrice} = props.response
  
@@ -31,4 +31,4 @@ const MenuCard = (props) => {
 }
 
 
-export default MenuCard
+export default MenuItem

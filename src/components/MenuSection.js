@@ -1,13 +1,19 @@
-import MenuCard from "./MenuItem"
+import MenuItem from "./MenuItem"
 import { useState } from "react";
 
 const MenuSection = (props)=> {
     console.log(props.response);
-    const {itemCards, title, categories} = props.response ; 
+    let {itemCards, title, categories} = props.response ; 
+   // console.log(categories)
+   if(categories != undefined){
+      categories.map((res, index) => {
+        itemCards = res.itemCards;
+      })
+   }
   //  console.log(itemCards+ " itemcards")
   //  console.log(categories+ " categories")
     const [show, setShow] = useState(false);
-    if(categories === true) console.log(true)
+   
     return ( 
      <section className="menu-container">
     <div className="heading">
@@ -15,17 +21,18 @@ const MenuSection = (props)=> {
       <button onClick={() => setShow(!show)}>{show? "-" : "+"}</button>
     </div>
     {show && <div className="answer">  {itemCards.map((res, index)=>{
-        return <MenuCard key= {index} response = {res.card.info}/>
+        return <MenuItem key= {index} response = {res.card.info}/>
     })}</div>}
-
+     <hr></hr>
     </section> 
+    
    
  )
 
  /*itemCards.map((res, index)=>{
     return <MenuCard key= {index} response = {res.card.info}/>
 })*/
- 
+  
 }
 
 export default MenuSection

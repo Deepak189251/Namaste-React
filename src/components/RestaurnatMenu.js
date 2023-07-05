@@ -22,7 +22,7 @@ const RestaurantMenu = () => {
         const data = await fetch(menuApi + resId);
       
         const resdata = await data.json()
-       console.log(resdata)
+      console.log(resdata)
         
 
        setResInfo(resdata?.data?.cards[0]?.card?.card?.info) ;
