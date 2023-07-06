@@ -16,5 +16,5 @@ const RestruantCard = (props) => {
        </div>
     )  
  }
- 
+    
  export default RestruantCard
