@@ -30,7 +30,7 @@ class UserClass extends React.Component {
                 })
             }}>Increment button</button>
             <h3>Name: {name}</h3>
-            <h5>Location: {location}</h5>
+            <h5>Location: {location}</h5> 
             <h5>Contact: {contact}</h5>
         </div>
     )
