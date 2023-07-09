@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 const RestruantCard = (props) => {
     const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId, id} = props.resdata.data
    
-  // const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId} = props.resdata
     return (
        <div className="restruant-card" ><Link to={`/restaurants/${id}`}>
           <img alt="restruant_logo" src={restaurantLogoUrl + cloudinaryImageId}/>
