@@ -10,11 +10,11 @@ const Header = () => {
          </div>
          <div className="nav-items">
           <ul>
-             <li><Link to={"/"}>Home</Link></li>
-             <li><Link to={"/about"}>About</Link></li>
-             <li><Link to={"/contactus"}>Contact Us</Link></li>
-             <li>Cart</li>
-             <button onClick={() => {
+             <li ><Link className="nav-link" to={"/"}>Home</Link></li>
+             <li ><Link className="nav-link" to={"/about"}>About</Link></li>
+             <li ><Link className="nav-link" to={"/contactus"}>Contact Us</Link></li>
+             <li className="nav-link">Cart</li>
+             <button className="nav-btn" onClick={() => {
               logBtn === "LogIn" ? setLogBtn("LogOut") : setLogBtn("LogIn")
              }}>{logBtn}</button> 
           </ul>

@@ -3,6 +3,9 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import MenuSection from "./MenuSection";
 import { menuApi } from "../utils/constant";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faClock, faIndianRupee } from "@fortawesome/free-solid-svg-icons";
+
 const RestaurantMenu = () => {
    
     const [resInfo, setResInfo] = useState(null)
@@ -34,9 +37,28 @@ const RestaurantMenu = () => {
     }
     return(
         <div className="res-menu">
-            <h5>{resInfo.name}</h5>
-            <h6>{resInfo.cuisines.join(", ")}</h6>
-            {menu.map((res, index) => {
+          <div className="menu-header"> 
+            <div className="header-details"> 
+              <h4>{resInfo.name}</h4>
+              <p>{resInfo.cuisines.join(", ")}</p>
+              <p><span>{resInfo.areaName}</span>, <span>{resInfo.sla.lastMileTravelString}</span></p>
+            </div>
+            <div className="rating-info">
+                <div className="avg-rating">
+                <span className="rating-icon"><FontAwesomeIcon icon={faStar} style={{color: "green"}}/></span>
+                <span className="rating">{resInfo.avgRatingString}</span>
+                </div>
+                <hr className="rating-hr"></hr>
+                <p className="total-rating">{resInfo.totalRatingsString}</p>
+                
+            </div>
+          </div>
+          <hr></hr>
+          <div className="additional-info">
+            <span className="delivery-time">{<FontAwesomeIcon icon={faClock}/>}{"  " + resInfo.sla.slaString}</span>
+            <span className="offer">{<FontAwesomeIcon icon={faIndianRupee}/>}{"  " + resInfo.costForTwoMessage}</span>
+          </div>
+          {menu.map((res, index) => {
                 return <MenuSection key={index} response = {res?.card?.card}/>
             })}
         </div> 

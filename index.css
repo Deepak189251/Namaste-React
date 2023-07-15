@@ -1,7 +1,7 @@
 .header{
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 1px solid green;
 }
 
 .logo-container{
@@ -26,12 +26,38 @@
   text-align: center;
 }
 
+.nav-link{
+  text-decoration: none;
+}
+
+.nav-link:hover{
+  color: orange;
+}
+
+.nav-btn{
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  font-size: large;
+}
+
+.nav-btn:hover{
+  color: orange;
+}
+
 .restruant-card {
     width: 230px;
     margin: 10px;
     background-color: gainsboro;
     padding: 5px;
-   
+    margin-left: 25px;
     
 }
 
@@ -43,6 +69,8 @@
 .restruant-container{
   display: flex;
   flex-wrap: wrap;
+  text-align: center;
+  margin: auto;
 }
 
 .search {
@@ -51,6 +79,14 @@
 
 .search-btn{
   margin: 5px;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  font-size: large;
 }
 
 .restruant-card img {
@@ -60,6 +96,14 @@
 
 .filter-btn {
   margin: 10px;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  font-size: large;
 }
 
 .shimmer_container{
@@ -78,19 +122,105 @@
 
 .menu-container{
   text-align: center;
-  background-color: gray;
 }
 
 .heading{
-  background-color: red;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu-heading{
   display: inline-block;
   margin : 10px;
+  margin-right: 100px;
+  
 }
 
 .user-card{
   border: 2px solid orange;
   margin: 20px;
+}
+
+.menu-border{
+  width: 100%;
+  height: 10px;
+  background-color: lightgray;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
+.res-menu {
+  width: 700px;
+  text-align: left;
+  margin: auto;
+  margin-top: 55px;
+}
+
+.res-details{
+  text-decoration: none;
+  color: black
+}
+
+.menu-btn{
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+p{
+  margin-bottom: 0;
+}
+
+.rating{
+  padding: 5px;
+  color: green;
+
+}
+
+.menu-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-hr{
+  margin: 0;
+}
+
+.total-rating{
+  font-size: x-small;
+}
+
+.offer{
+  margin-left: 20px;
+}
+
+.product-info{
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-img{
+  width: 120px;
+  height: 100px;
+  border-radius: 8px;
+  margin-left: 25px;
+}
+
+.product-header{
+  text-align: left;
+}
+
+.product-name{
+  margin-bottom: 0px;
+}
+
+.product-price{
+  padding-bottom: 10px;
 }

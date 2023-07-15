@@ -1,16 +1,18 @@
 import MenuItem from "./MenuItem"
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"
+
 
 const MenuSection = (props)=> {
-    console.log(props.response);
     let {itemCards, title, categories} = props.response ; 
-   // console.log(categories)
+   // console.log(item)
    if(categories != undefined){
       categories.map((res, index) => {
         itemCards = res.itemCards;
       })
    }
-  //  console.log(itemCards+ " itemcards")
+    
   //  console.log(categories+ " categories")
     const [show, setShow] = useState(false);
    
@@ -18,12 +20,12 @@ const MenuSection = (props)=> {
      <section className="menu-container">
     <div className="heading">
       <h5 className="menu-heading">{title}</h5>
-      <button onClick={() => setShow(!show)}>{show? "-" : "+"}</button>
+      <button className="menu-btn" onClick={() => setShow(!show)}>{show? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown}/>}</button>
     </div>
+      <div className="menu-border"></div>
     {show && <div className="answer">  {itemCards.map((res, index)=>{
         return <MenuItem key= {index} response = {res.card.info}/>
     })}</div>}
-     <hr></hr>
     </section> 
     
    
