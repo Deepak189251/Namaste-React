@@ -32,7 +32,7 @@ const MenuItem = (props) => {
     <div className="product-header">
       <p>{productIcon}</p>
      <h6 className="product-name">{name}</h6>
-     <p className="product-price"> &#8377;{price?  price/100 :  defaultPrice/100}</p>
+     <p className="product-price"> &#8377;{price?  price/100 :  defaultPrice/100} + bucks</p>
      <p className="product-desc">{description}</p>
     </div>
     <div className="product-imgdiv">
