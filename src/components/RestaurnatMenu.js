@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import MenuSection from "./MenuSection";
-import { menuApi } from "../utils/constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faClock, faIndianRupee } from "@fortawesome/free-solid-svg-icons";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
@@ -35,8 +34,8 @@ const RestaurantMenu = () => {
     */
 
     const {resInfo, menu} = useRestaurantMenu(resId)
-    console.log(resInfo)
-    console.log(menu)
+  //  console.log(resInfo)
+  //  console.log(menu)
     if(resInfo === null){
         return <Shimmer />
     }

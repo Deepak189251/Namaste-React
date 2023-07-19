@@ -1,38 +1,57 @@
 import RestruantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
+import { api } from "../utils/constant"
+import useOnlineStatus from "../utils/useOnlineStatus"
 
 
 const Body = () => {
-   const [restaurantList, setRestaurantList] = useState([])
-
-   const [filteredRestaurant, setFilteredRestaurant] = useState([])
 
    const [searchText, setSearchText] = useState("")
-  
-   useEffect(() => {
-      fetchData()
+   const [filteredRestaurant, setFilteredRestaurant] = useState([])
+ 
+  // const restaurantList = useRestaurantList();
+ 
+    
+   const [restaurantList, setRestaurantList] = useState([])
+   const onlineStatus = useOnlineStatus();
+   
+   
+   
+      useEffect(() => {
+         fetchData()
       
-   },[]);
+      },[]);
+   
+  
 
 
-
-       
    const fetchData = async () => {
-       const data = await fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.462521&lng=85.8829895&page_type=DESKTOP_WEB_LISTING");
+       const data = await fetch(api);
        const jsondata = await data.json()
        setRestaurantList(jsondata?.data?.cards[2]?.data?.data?.cards)
-    
        setFilteredRestaurant(jsondata?.data?.cards[2]?.data?.data?.cards)
 
-   }  
- 
+   }   
+     
+   
+  
    
 //   Conditional Rendering. 
+if(onlineStatus === false){
+   return(<h1>please Check your internet connection!</h1>)
+}  
+   
     
    if(restaurantList.length === 0){
       return <Shimmer/>
    } 
+
+   
+ //  console.log(restaurantList)
+  // setFilteredRestaurant(restaurantList);
+  
+ 
     return (
        <div className="body">
           <div className="search-element">

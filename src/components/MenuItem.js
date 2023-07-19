@@ -4,7 +4,7 @@ import { faCircle, faSquareCaretUp } from "@fortawesome/free-solid-svg-icons";
 const MenuItem = (props) => {
  
  const {name, imageId, price, ratings, description, defaultPrice, itemAttribute} = props.response
- console.log(itemAttribute)
+ //console.log(itemAttribute)
  let productIcon 
    if(itemAttribute.vegClassifier === "VEG"){
       productIcon = <FontAwesomeIcon icon={faCircle} style={{color: "green"}}/>
