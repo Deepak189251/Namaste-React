@@ -15,16 +15,13 @@ const Body = () => {
     
    const [restaurantList, setRestaurantList] = useState([])
    const onlineStatus = useOnlineStatus();
+   console.log(useState());
    
-   
-   
-      useEffect(() => {
-         fetchData()
+   useEffect(() => {
+      fetchData()
       
-      },[]);
-   
-  
-
+   },[]);
+    
 
    const fetchData = async () => {
        const data = await fetch(api);
@@ -35,12 +32,10 @@ const Body = () => {
    }   
      
    
-  
-   
 //   Conditional Rendering. 
-if(onlineStatus === false){
-   return(<h1>please Check your internet connection!</h1>)
-}  
+   if(onlineStatus === false){
+     return(<h1>please Check your internet connection!</h1>)
+   }  
    
     
    if(restaurantList.length === 0){
@@ -48,13 +43,13 @@ if(onlineStatus === false){
    } 
 
    
- //  console.log(restaurantList)
+  // console.log(restaurantList)
   // setFilteredRestaurant(restaurantList);
   
  
-    return (
-       <div className="body">
-          <div className="search-element">
+   return (
+      <div className="body">
+         <div className="search-element">
 
 
             <button className="filter-btn" onClick={() => {
@@ -62,7 +57,7 @@ if(onlineStatus === false){
                   Restaurant.data.avgRating >= 4
                ))
                setFilteredRestaurant(filteredList);
-            }}>Top Rated Restaurant</button>
+            }}>Top Rated Restaurant</button> 
 
 
             <input type="text" id="search-input" value={searchText} onChange={(e) => {setSearchText(e.target.value)}}></input>
@@ -72,20 +67,20 @@ if(onlineStatus === false){
                }) 
                setFilteredRestaurant(searchedRestaurant) 
                }}>Search</button>
-          </div>
+         </div>
           
-          <div className="restruant-container">
+         <div className="restruant-container">
            {
              
              filteredRestaurant?.map((Restaurant) => (
-               <RestruantCard key = {Restaurant.data.id} resdata = {Restaurant} />
+               <RestruantCard key = {Restaurant.data.id} resdata = {Restaurant}/>
             ))
 
            }
            
-          </div>
-       </div>
-    )
- }
+         </div>
+      </div>
+   )
+}
 
  export default Body
