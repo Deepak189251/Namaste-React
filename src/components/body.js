@@ -15,7 +15,7 @@ const Body = () => {
     
    const [restaurantList, setRestaurantList] = useState([])
    const onlineStatus = useOnlineStatus();
-   console.log(useState());
+  // console.log(useState());
    
    useEffect(() => {
       fetchData()
@@ -26,9 +26,10 @@ const Body = () => {
    const fetchData = async () => {
        const data = await fetch(api);
        const jsondata = await data.json()
-       setRestaurantList(jsondata?.data?.cards[2]?.data?.data?.cards)
-       setFilteredRestaurant(jsondata?.data?.cards[2]?.data?.data?.cards)
-
+       console.log(jsondata)
+       setRestaurantList(jsondata?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+       setFilteredRestaurant(jsondata?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+       
    }   
      
    
@@ -73,7 +74,7 @@ const Body = () => {
            {
              
              filteredRestaurant?.map((Restaurant) => (
-               <RestruantCard key = {Restaurant.data.id} resdata = {Restaurant}/>
+               <RestruantCard key = {Restaurant.info.id} resdata = {Restaurant}/>
             ))
 
            }

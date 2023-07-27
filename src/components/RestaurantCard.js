@@ -2,7 +2,8 @@ import { restaurantLogoUrl } from "../utils/constant"
 import { Link } from "react-router-dom"
 
 const RestruantCard = (props) => {
-    const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId, id} = props.resdata.data
+   console.log(props)
+    const {name, cuisines, avgRating, deliveryTime, cloudinaryImageId, id} = props.resdata.info
    
     return (
        <div className="restruant-card" ><Link className="res-details" to={`/restaurants/${id}`}>
