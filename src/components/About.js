@@ -19,7 +19,6 @@ class AboutClass extends React.Component{
         <>
         <div>This is a food ordering application developed with namaste react course.</div>
         <UserClass name={"first "} location= {"cuttack"} contact= {"@Deepak22"}/>
-        <UserClass name={"second "} location= {"cuttack"} contact= {"@Deepak22"}/>
         
         </>
      )
