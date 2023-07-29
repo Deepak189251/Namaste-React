@@ -51,7 +51,7 @@ class UserClass extends React.Component {
             <h3>Name: {name}</h3>
             <h5>Location: {location}</h5> 
         </div>
-    )
+    )                                                                                                                                                                                              
    }
 }
 
