@@ -33,7 +33,12 @@ const RestaurantMenu = () => {
     }
     */
 
+    // This useRestaurantMenu is a custom Hook, it takes resId as argument and by using that with api it gets the data; 
+  
     const {resInfo, menu} = useRestaurantMenu(resId)
+
+
+
   //  console.log(resInfo)
   //  console.log(menu)
     if(resInfo === null){

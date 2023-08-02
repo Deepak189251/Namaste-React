@@ -3,20 +3,23 @@ import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
 import { api } from "../utils/constant"
 import useOnlineStatus from "../utils/useOnlineStatus"
+import useRestaurantList from "../utils/useRestaurantList"
 
 
 const Body = () => {
 
    const [searchText, setSearchText] = useState("")
-   const [filteredRestaurant, setFilteredRestaurant] = useState([])
+ //  const [filteredRestaurant, setFilteredRestaurant] = useState([])
  
   // const restaurantList = useRestaurantList();
  
     
-   const [restaurantList, setRestaurantList] = useState([])
+ //  const [restaurantList, setRestaurantList] = useState([])
    const onlineStatus = useOnlineStatus();
+   let {restaurantList, filteredRestaurant} = useRestaurantList()
+   console.log(restaurantList, filteredRestaurant)
   // console.log(useState());
-   
+ /*  
    useEffect(() => {
       fetchData()
       
@@ -32,11 +35,21 @@ const Body = () => {
        
    }   
      
+   */
+
    
+
+   
+
+   
+   
+
 //   Conditional Rendering. 
    if(onlineStatus === false){
      return(<h1>please Check your internet connection!</h1>)
    }  
+   
+
    
     
    if(restaurantList.length === 0){
@@ -44,7 +57,12 @@ const Body = () => {
    } 
 
    
-  // console.log(restaurantList)
+   
+   console.log(restaurantList)
+   console.log(filteredRestaurant)
+ 
+
+   
   // setFilteredRestaurant(restaurantList);
   
  
@@ -55,18 +73,19 @@ const Body = () => {
 
             <button className="filter-btn" onClick={() => {
               const filteredList = restaurantList.filter((Restaurant) => (
-                  Restaurant.data.avgRating >= 4
+                  Restaurant.info.avgRating >= 4
                ))
-               setFilteredRestaurant(filteredList);
+               filteredRestaurant = filteredList;
             }}>Top Rated Restaurant</button> 
 
 
             <input type="text" id="search-input" value={searchText} onChange={(e) => {setSearchText(e.target.value)}}></input>
             <button className="search-btn" onClick={() => {
                const searchedRestaurant = restaurantList.filter((res)=> {
-                 return res.data.name.toLowerCase().includes(searchText.toLowerCase())
+                 return res.info.name.toLowerCase().includes(searchText.toLowerCase())
                }) 
-               setFilteredRestaurant(searchedRestaurant) 
+             //  setFilteredRestaurant(searchedRestaurant) 
+               filteredRestaurant = searchedRestaurant
                }}>Search</button>
          </div>
           
