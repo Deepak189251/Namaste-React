@@ -1,3 +1,11 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/*
 .header{
     display: flex;
     justify-content: space-between;
@@ -223,4 +231,6 @@ p{
 
 .product-price{
   padding-bottom: 10px;
-}
+} */
+
+
