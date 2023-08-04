@@ -50,27 +50,27 @@ const RestaurantMenu = () => {
     const {lastMileTravelString, slaString} = resInfo.sla
 
     return(
-        <div className="res-menu">
-          <div className="menu-header"> 
+        <div className="res-menu w-[700px] text-left mx-auto mt-[55px]">
+          <div className="menu-header flex justify-between pb-4"> 
             <div className="header-details"> 
               <h4>{name}</h4>
               <p>{cuisines.join(", ")}</p>
               <p><span>{areaName}</span>, <span>{lastMileTravelString}</span></p>
             </div>
-            <div className="rating-info">
+            <div className="rating-info border-black">
                 <div className="avg-rating">
                 <span className="rating-icon"><FontAwesomeIcon icon={faStar} style={{color: "green"}}/></span>
-                <span className="rating">{avgRatingString}</span>
+                <span className="rating p-1 text-green-500">{avgRatingString}</span>
                 </div>
-                <hr className="rating-hr"></hr>
-                <p className="total-rating">{totalRatingsString}</p>
+                <hr className="rating-hr m-0"></hr>
+                <p className="total-rating font text-xs">{totalRatingsString}</p>
                 
             </div>
           </div>
           <hr></hr>
-          <div className="additional-info">
+          <div className="additional-info mt-4">
             <span className="delivery-time">{<FontAwesomeIcon icon={faClock}/>}{"  " + slaString}</span>
-            <span className="offer">{<FontAwesomeIcon icon={faIndianRupee}/>}{"  " + costForTwoMessage}</span>
+            <span className="offer ml-5">{<FontAwesomeIcon icon={faIndianRupee}/>}{"  " + costForTwoMessage}</span>
           </div>
           {menu.map((res, index) => {
                 return <MenuSection key={index} response = {res?.card?.card}/>

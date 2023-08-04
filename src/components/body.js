@@ -1,4 +1,4 @@
-import RestruantCard from "./RestaurantCard"
+import RestruantCard, {promotedRestaurant} from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
 import { api } from "../utils/constant"
@@ -18,6 +18,8 @@ const Body = () => {
    const onlineStatus = useOnlineStatus();
    let {restaurantList, filteredRestaurant} = useRestaurantList()
    console.log(restaurantList, filteredRestaurant)
+
+ //  const promotedRestaurant = promotedRestaurant(RestruantCard)
   // console.log(useState());
  /*  
    useEffect(() => {
@@ -92,6 +94,7 @@ const Body = () => {
            {
              
              filteredRestaurant?.map((Restaurant) => (
+               
                <RestruantCard key = {Restaurant.info.id} resdata = {Restaurant}/>
             ))
 
