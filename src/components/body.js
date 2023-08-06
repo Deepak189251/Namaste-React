@@ -3,25 +3,27 @@ import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
 import { api } from "../utils/constant"
 import useOnlineStatus from "../utils/useOnlineStatus"
-import useRestaurantList from "../utils/useRestaurantList"
+//import useRestaurantList from "../utils/useRestaurantList"
 
 
 const Body = () => {
 
    const [searchText, setSearchText] = useState("")
- //  const [filteredRestaurant, setFilteredRestaurant] = useState([])
+   const [filteredRestaurant, setFilteredRestaurant] = useState([])
+   const [restaurantList, setRestaurantList] = useState([])
  
-  // const restaurantList = useRestaurantList();
- 
-    
- //  const [restaurantList, setRestaurantList] = useState([])
    const onlineStatus = useOnlineStatus();
-   let {restaurantList, filteredRestaurant} = useRestaurantList()
-   console.log(restaurantList, filteredRestaurant)
+ 
+   //  const restaurantList = useRestaurantList();  
+   
+  /*et {restaurantList, filteredRestaurant} = useRestaurantList()
+   console.log(restaurantList, filteredRestaurant) */
 
- //  const promotedRestaurant = promotedRestaurant(RestruantCard)
-  // console.log(useState());
- /*  
+
+
+  // const promotedRestaurant = promotedRestaurant(RestruantCard)
+   console.log(useState());
+  
    useEffect(() => {
       fetchData()
       
@@ -37,7 +39,7 @@ const Body = () => {
        
    }   
      
-   */
+   
 
    
 
@@ -74,9 +76,9 @@ const Body = () => {
 
             <button className="filter-btn px-4 py-2 bg-gray-200 m-4 rounded-lg" onClick={() => {
               const filteredList = restaurantList.filter((Restaurant) => (
-                  Restaurant.info.avgRating >= 4
+                   Restaurant.info.avgRating >= 4
                ))
-               filteredRestaurant = filteredList;
+               setFilteredRestaurant(filteredList);
             }}>Top Rated Restaurant</button> 
 
 
@@ -85,8 +87,8 @@ const Body = () => {
                const searchedRestaurant = restaurantList.filter((res)=> {
                  return res.info.name.toLowerCase().includes(searchText.toLowerCase())
                }) 
-             //  setFilteredRestaurant(searchedRestaurant) 
-               filteredRestaurant = searchedRestaurant
+               setFilteredRestaurant(searchedRestaurant) 
+              
                }}>Search</button>
          </div>
           

@@ -35,8 +35,9 @@ const RestaurantMenu = () => {
 
     // This useRestaurantMenu is a custom Hook, it takes resId as argument and by using that with api it gets the data; 
   
-    const {resInfo, menu} = useRestaurantMenu(resId)
-
+    const {resInfo} = useRestaurantMenu(resId)
+   // let filteredSection = []
+    console.log(typeof menu)
 
 
   //  console.log(resInfo)
@@ -45,34 +46,45 @@ const RestaurantMenu = () => {
         return <Shimmer />
     }
 
-    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo
+    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo.data?.cards[0]?.card?.card?.info
 
-    const {lastMileTravelString, slaString} = resInfo.sla
+    const {lastMileTravelString, slaString} = resInfo.data?.cards[0]?.card?.card?.info?.sla
+
+    const filteredSection = resInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((res) => {
+
+      return res?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    })
+
+    console.log(filteredSection)
 
     return(
-        <div className="res-menu w-[700px] text-left mx-auto mt-[55px]">
+        <div className="res-menu w-[720px] text-left mx-auto mt-[55px]">
           <div className="menu-header flex justify-between pb-4"> 
             <div className="header-details"> 
-              <h4>{name}</h4>
-              <p>{cuisines.join(", ")}</p>
-              <p><span>{areaName}</span>, <span>{lastMileTravelString}</span></p>
+              <h4 className="font-bold mb-2 text-lg">{name}</h4>
+              <p className=" text-xs">{cuisines.join(", ")}</p>
+              <p className=" text-xs"><span>{areaName}</span>, <span>{lastMileTravelString}</span></p>
             </div>
-            <div className="rating-info border-black">
-                <div className="avg-rating">
+            <div className="rating-info shadow-md rounded-md pt-[10px]">
+                <div className="avg-rating text-center pb-1">
                 <span className="rating-icon"><FontAwesomeIcon icon={faStar} style={{color: "green"}}/></span>
                 <span className="rating p-1 text-green-500">{avgRatingString}</span>
                 </div>
-                <hr className="rating-hr m-0"></hr>
-                <p className="total-rating font text-xs">{totalRatingsString}</p>
+                <hr className="rating-hr w-[80%] m-auto"></hr>
+                <p className="total-rating font text-xs pt-1">{totalRatingsString}</p>
                 
             </div>
           </div>
           <hr></hr>
-          <div className="additional-info mt-4">
-            <span className="delivery-time">{<FontAwesomeIcon icon={faClock}/>}{"  " + slaString}</span>
+          <div className="additional-info mt-4 mb-4">
+            <span className="delivery-time text-sm">{<FontAwesomeIcon icon={faClock}/>}{"  " + slaString}</span>
             <span className="offer ml-5">{<FontAwesomeIcon icon={faIndianRupee}/>}{"  " + costForTwoMessage}</span>
           </div>
-          {menu.map((res, index) => {
+         { /* {menu = menu.filter((res) => {
+            return res.card.card["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+          })}
+        {console.log(typeof filteredSection)} */ }
+          {filteredSection.map((res, index) => {
                 return <MenuSection key={index} response = {res?.card?.card}/>
             })}
         </div> 
@@ -82,7 +94,6 @@ const RestaurantMenu = () => {
 {menu.map((res, index)=>{
     return <MenuCard key= {index} response = {res.card.info}/>
 })} 
-
 
        setMenu(resdata?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards)
        */

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { restaurantLogoUrl } from "../utils/constant";
 import { faCircle, faSquareCaretUp } from "@fortawesome/free-solid-svg-icons";
-const MenuItem = (props) => {
+const MenuItems = (props) => {
  
  const {name, imageId, price, ratings, description, defaultPrice, itemAttribute} = props.response
  //console.log(itemAttribute)
@@ -28,15 +28,21 @@ const MenuItem = (props) => {
     </div> */
 
  <>
-  <div className="product-info flex justify-between">
-    <div className="product-header text-left">
+  <div className="product-info flex justify-between mb-5 mt-3">
+    <div className="product-header text-left w-[700px]">
       <p>{productIcon}</p>
-     <h6 className="product-name mb-0">{name}</h6>
-     <p className="product-price pb-[10px]"> &#8377;{price?  price/100 :  defaultPrice/100} + bucks</p>
-     <p className="product-desc">{description}</p>
+     <h6 className="product-name mb-0 font-semibold">{name}</h6>
+     <p className="product-price pb-[10px] text-sm font-normal"> &#8377;{price?  price/100 :  defaultPrice/100}</p>
+     <p className="product-desc pr-2 text-xs font-light">{description}</p>
     </div>
-    <div className="product-imgdiv">
-    <img className="product-img w-[120px] h-[100px] border-r-8 ml-[25px]" alt="product_image" src={restaurantLogoUrl + imageId}/>
+    <div>
+      <div className="product-imgdiv w-[110px] ml-6 relative">
+        <img className="product-img w-[100%] h-24 rounded-md" src={restaurantLogoUrl + imageId}/>
+        <button className=" absolute bottom-[-6px] right-[11px] py-[7px] px-[32px]  bg-white shadow-sm text-xs rounded-sm text-center text-green-600 font-medium">ADD</button>
+      </div>
+      <div >
+        
+      </div>
     </div>
    </div>
    <hr></hr>
@@ -45,4 +51,4 @@ const MenuItem = (props) => {
 }
 
 
-export default MenuItem
+export default MenuItems

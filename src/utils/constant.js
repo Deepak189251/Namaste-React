@@ -9,6 +9,9 @@ export const menuApi = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_ME
 
 
 `https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.462521&lng=85.8829895&restaurantId=${resId}&submitAction=ENTER`
+
+https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 */
 
-export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+
+export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.46641779418709&lng=85.87408971885445&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
