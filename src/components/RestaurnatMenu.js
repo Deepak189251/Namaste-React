@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import MenuSection from "./MenuSection";
@@ -13,6 +13,14 @@ const RestaurantMenu = () => {
     
     const {resId} = useParams();
    // console.log(resId)
+
+   const [show, setShow] = useState(true);
+   const [showIndex, setShowIndex] = useState(null)
+
+   const changeShow = (index, shown)=> {
+    setShowIndex(index)
+    setShow(!shown)
+  }
 
  /*   useEffect(() => {
        fetchInfo();
@@ -85,7 +93,12 @@ const RestaurantMenu = () => {
           })}
         {console.log(typeof filteredSection)} */ }
           {filteredSection.map((res, index) => {
-                return <MenuSection key={index} response = {res?.card?.card}/>
+                return <MenuSection 
+                key={index}
+                no={index}
+                response = {res?.card?.card} 
+                show = {index === showIndex ? show : false}
+                showItems= {changeShow}/>
             })}
         </div> 
     )
