@@ -58,7 +58,7 @@ const RestaurantMenu = () => {
 
     const {lastMileTravelString, slaString} = resInfo.data?.cards[0]?.card?.card?.info?.sla
 
-    const filteredSection = resInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((res) => {
+    const filteredSection = resInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(res=> {
 
       return res?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     })
