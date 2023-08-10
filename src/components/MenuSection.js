@@ -7,7 +7,7 @@ import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"
 const MenuSection = (props)=> {
     let {itemCards, title, categories} = props.response ; 
     const changeShow = props.showItems
-    console.log(changeShow)
+   // console.log(changeShow)
     const show = props.show
     const index = props.no
    // console.log(item)
