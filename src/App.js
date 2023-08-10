@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from "react";
+import React, {lazy, Suspense, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,12 +8,19 @@ import ContactUs from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurnatMenu";
 import Shimmer from "./components/Shimmer";
+import Cart from "./components/Cart";
+import CartContext from "./utils/Context";
+
 const Applayout = () => {
+  // const [cart, setCart] = useState([])
+
    return (
+     <CartContext>
       <div className="app">
         <Header/>
         <Outlet/>
       </div>
+     </CartContext>  
    )
 }
 
@@ -37,6 +44,10 @@ const AppRouter = createBrowserRouter([
          {
             path: "/contactus",
             element: <ContactUs/>
+         },
+         {
+            path: "/cart",
+            element: <Cart/>
          },
          {
             path: "/restaurants/:resId",
