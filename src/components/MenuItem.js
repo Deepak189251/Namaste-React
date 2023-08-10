@@ -1,9 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { restaurantLogoUrl } from "../utils/constant";
-import { faCircle, faSquareCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useContext, useState } from "react";
+import { CartData } from "../utils/Context";
+
 const MenuItems = (props) => {
+   const {name, imageId, price, ratings, description, defaultPrice, itemAttribute, id} = props.response
+
+   const {cart, setCart} = useContext(CartData);
+   const [click, setClick] = useState(false)
+
+   const addToCart = () => {
+      setCart([...cart, props.response])
+   setClick(!click)
+     // console.log(cart)
+   }
+
+   const removeFromCart = () =>{
+      setCart(cart.filter((res) => Number(id) !== Number(res.id)))
+      setClick(!click)
+   }
  
- const {name, imageId, price, ratings, description, defaultPrice, itemAttribute} = props.response
+ 
  //console.log(itemAttribute)
  let productIcon 
    if(itemAttribute.vegClassifier === "VEG"){
@@ -38,7 +56,12 @@ const MenuItems = (props) => {
     <div>
       <div className="product-imgdiv w-[110px] ml-6 relative">
         <img className="product-img w-[100%] h-24 rounded-md" src={restaurantLogoUrl + imageId}/>
-        <button className=" absolute bottom-[-6px] right-[11px] py-[7px] px-[32px]  bg-white shadow-sm text-xs rounded-sm text-center text-green-600 font-medium">ADD</button>
+        <div className="absolute bottom-[-6px] right-[11px] py-[7px] px-[32px] bg-white shadow-md  rounded-sm text-center cursor-pointer">
+         {click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>}
+       
+        </div>
+       
+        {console.log(cart)}
       </div>
       <div >
         
