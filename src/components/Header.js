@@ -5,12 +5,16 @@ import useOnlineStatus from "../utils/useOnlineStatus"
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartData } from "../utils/Context"
+//import { CartState } from "../utils/Context"
 
 
 const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
-    const{cart} = useContext(CartData)
+    const {cart, setCart} = useContext(CartData)
     const onlineStatus = useOnlineStatus();
+    
+    //const {state: {cart} } = CartState();
+
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
         <div className="logo-container h-[100px] ml-16">
