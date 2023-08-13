@@ -3,22 +3,37 @@ import { restaurantLogoUrl } from "../utils/constant";
 import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
 import { CartData } from "../utils/Context";
+//import { CartState } from "../utils/Context";
 
 const MenuItems = (props) => {
    const {name, imageId, price, ratings, description, defaultPrice, itemAttribute, id} = props.response
 
+   // const {state : {cart}, dispatch} = CartState();
+
+  // console.log(cart)
    const {cart, setCart} = useContext(CartData);
-   const [click, setClick] = useState(false)
+  // const [click, setClick] = useState(false)
 
    const addToCart = () => {
+    /*  dispatch({
+         type: "Add",
+         payload: props.response
+      })*/
+
       setCart([...cart, props.response])
-   setClick(!click)
      // console.log(cart)
    }
 
    const removeFromCart = () =>{
-      setCart(cart.filter((res) => Number(id) !== Number(res.id)))
-      setClick(!click)
+    /*  dispatch({
+         type:"Remove",
+         payload: props.response
+      })*/
+
+      setCart(cart.filter((res) => {
+         return Number(res.id) !== Number(id)
+      }))
+
    }
  
  
@@ -57,8 +72,12 @@ const MenuItems = (props) => {
       <div className="product-imgdiv w-[110px] ml-6 relative">
         <img className="product-img w-[100%] h-24 rounded-md" src={restaurantLogoUrl + imageId}/>
         <div className="absolute bottom-[-6px] right-[11px] py-[7px] px-[32px] bg-white shadow-md  rounded-sm text-center cursor-pointer">
-         {click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>}
-       
+         {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
+       {cart.some(p => p.id === id) ? 
+       (<button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>) 
+         :
+       ( <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button>)
+      }
         </div>
        
         {console.log(cart)}
