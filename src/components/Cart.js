@@ -2,10 +2,17 @@ import { useContext, useState, useEffect } from "react"
 import { CartData } from "../utils/Context"
 import { Link } from "react-router-dom";
 import CartItems from "./CartItems";
+import { CartState } from "../utils/Context";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = () =>{
+    
     const [price, setPrice] = useState(0)
     const {cart, setCart} = useContext(CartData)
+
+   // const{state: {cart}, dispatch} = CartState();
+   
     console.log(cart)
 
     useEffect(() => {
@@ -35,20 +42,26 @@ const Cart = () =>{
                return <CartItems key={index} res={res}/>
             })}
         </div>
-        <div className="priceContainer w-[260px] ml-[670px]">
+     <div className=" flex">
+        <div className="priceContainer w-[260px] ml-[620px]">
             <div className=" border-b-2 pb-2 pt-2">
-                <span className=" mr-[133px] font-semibold">Subtotal :</span>
-                <span className="text-sm font-semibold ">{price}</span>
+                <span className=" mr-[133px] font-semibold text-sm">Subtotal :</span>
+                <span className="text-sm font-semibold ">{parseFloat(price.toFixed(2))}</span>
             </div>
             <div className="border-b-2 pb-2 pt-2">
-                <span className=" mr-[76px] font-semibold">Delivery charges : </span>
+                <span className=" mr-[65px] text-sm font-semibold">Delivery charges :  <FontAwesomeIcon icon={faCircleInfo}/> </span>
                 <span className="text-sm font-semibold ">10</span>
             </div>
             <div className="border-b-2 pb-2 pt-2">
-                <span className="mr-[114px] font-semibold">Grandtotal : </span>
-                <span className=" font-bold text-base ">{price + 10}</span>
+                <span className="mr-[100px] font-semibold">Grandtotal : </span>
+                <span className=" font-bold text-base text-left">{parseFloat(price.toFixed(2)) + 10}</span>
             </div>
 
+        </div>
+
+        <div className=" ml-6 w-[155px] mt-[88px]">
+          <div className=" p-[6px] m-auto w-[100%] text-center  bg-orange-500 text-sm font-bold text-white cursor-pointer" onClick={()=> alert("your order is placed!")}>Proceed to Checkout</div>
+        </div>
         </div>
         </div>
     )
