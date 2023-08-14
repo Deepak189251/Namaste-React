@@ -12,6 +12,9 @@ const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
     const {cart, setCart} = useContext(CartData)
     const onlineStatus = useOnlineStatus();
+    const [mouseHover, setMouseHover] = useState(false)
+
+    //console.log(mouseHover)
     
     //const {state: {cart} } = CartState();
 
@@ -29,8 +32,21 @@ const Header = () => {
              <button className="nav-btn px-4  hover:text-orange-500 text-lg font-bold" onClick={() => {
               logBtn === "LogIn" ? setLogBtn("LogOut") : setLogBtn("LogIn")
              }}>{logBtn}</button> 
-             <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> </li>
+             <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold"><Link onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> </li>
+             {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">{cart.length > 0 
              
+             ?
+              (<div>
+                
+              </div>)
+
+             :
+              (<div>
+                <h3 className=" ml-[50px] text-2xl font-bold mb-3 mt-[35px] text-[#7e808c]">Cart Empty!</h3>
+                <p className=" ml-[45px] mr-[35px] mb-[30px] text-[#93959f]">Good food is always cooking go ahead, order some yummy items from menu</p>
+              </div>)
+              
+              }</div>)}
           </ul>
          </div>
       </header>
