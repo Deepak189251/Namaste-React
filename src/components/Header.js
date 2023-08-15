@@ -5,6 +5,7 @@ import useOnlineStatus from "../utils/useOnlineStatus"
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartData } from "../utils/Context"
+import CartItems from "./CartItems"
 //import { CartState } from "../utils/Context"
 
 
@@ -36,11 +37,32 @@ const Header = () => {
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">{cart.length > 0 
              
              ?
-              (<div>
-                
-              </div>)
+              
+             (<div>
+              {cart.map((res) => (
+                 <CartItems key={res.id} res={res}/>
+              ))}
+             </div>)
+
+
+
+
+
+
+
+             /* (<div>
+                  {cart.map((res) => {
+                    return 
+                    (<div> 
+                       <div><img src={res.imageId} alt=""></img></div>
+                       <div><p>{res.name}</p></div>
+                       <div><p>1</p></div>
+                    </div>)
+                  })}
+              </div>)*/
 
              :
+
               (<div>
                 <h3 className=" ml-[50px] text-2xl font-bold mb-3 mt-[35px] text-[#7e808c]">Cart Empty!</h3>
                 <p className=" ml-[45px] mr-[35px] mb-[30px] text-[#93959f]">Good food is always cooking go ahead, order some yummy items from menu</p>
