@@ -10,15 +10,19 @@ import RestaurantMenu from "./components/RestaurnatMenu";
 import Shimmer from "./components/Shimmer";
 import Cart from "./components/Cart";
 import CartContext from "./utils/Context";
+import TotalPriceContext from "./utils/PriceContext";
 
 const Applayout = () => {
   // const [cart, setCart] = useState([])
-
+  
    return (
      <CartContext>
       <div className="app">
+       <TotalPriceContext>
         <Header/>
+      
         <Outlet/>
+        </TotalPriceContext>
       </div>
      </CartContext>  
    )
