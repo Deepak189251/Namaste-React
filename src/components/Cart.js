@@ -5,18 +5,20 @@ import CartItems from "./CartItems";
 import { CartState } from "../utils/Context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { TotalPriceData }  from "../utils/PriceContext";
 
 const Cart = () =>{
     
-    const [price, setPrice] = useState(0)
+   // const [price, setPrice] = useState(0)
     const {cart, setCart} = useContext(CartData)
+    const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
 
    // const{state: {cart}, dispatch} = CartState();
    
     console.log(cart)
 
     useEffect(() => {
-        setPrice(cart.reduce((acc, curr) => acc + curr.price/100 , 0));
+        setTotalPrice(cart.reduce((acc, curr) => acc + curr.price ? curr.price/100 : curr.defaultPrice/100 , 0));
     })
 
     if(cart.length === 0){
@@ -46,7 +48,7 @@ const Cart = () =>{
         <div className="priceContainer w-[260px] ml-[620px]">
             <div className=" border-b-2 pb-2 pt-2">
                 <span className=" mr-[133px] font-semibold text-sm">Subtotal :</span>
-                <span className="text-sm font-semibold ">{parseFloat(price.toFixed(2))}</span>
+                <span className="text-sm font-semibold ">{parseFloat(totalPrice.toFixed(2))}</span>
             </div>
             <div className="border-b-2 pb-2 pt-2">
                 <span className=" mr-[65px] text-sm font-semibold">Delivery charges :  <FontAwesomeIcon icon={faCircleInfo}/> </span>
@@ -54,7 +56,7 @@ const Cart = () =>{
             </div>
             <div className="border-b-2 pb-2 pt-2">
                 <span className="mr-[100px] font-semibold">Grandtotal : </span>
-                <span className=" font-bold text-base text-left">{parseFloat(price.toFixed(2)) + 10}</span>
+                <span className=" font-bold text-base text-left">{parseFloat(totalPrice.toFixed(2)) + 10}</span>
             </div>
 
         </div>
