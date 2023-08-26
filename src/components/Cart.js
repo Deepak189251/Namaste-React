@@ -11,16 +11,67 @@ const Cart = () =>{
     
    // const [price, setPrice] = useState(0)
     const {cart, setCart} = useContext(CartData)
-    const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
+    const {totalPrice} = useContext(TotalPriceData)
+    //const [finalItem, setFinalItem] = useState([])
+
+    // let finalItem = []
 
    // const{state: {cart}, dispatch} = CartState();
    
-    console.log(cart)
+ /*   console.log(cart)
 
-    useEffect(() => {
-        setTotalPrice(cart.reduce((acc, curr) => acc + curr.price ? curr.price/100 : curr.defaultPrice/100 , 0));
-    })
+   let element = cart.reduce((acc, curr) => {
+    acc[curr.id] = (acc[curr.id] || 0) + 1;
+    return acc
+}, {})
 
+   let elements = Object.keys(element)
+
+   console.log(elements)*/
+
+   /* setQuantity(cart.reduce((acc, curr) => {
+        acc[curr.id] = (acc[curr.id] || 0) + 1;
+        return acc
+   }, {}))*/
+
+   // console.log(element)
+
+   /* cart.map((res) => {
+        if(finalItem.indexOf(Number(res.id)) === -1){
+            finalItem.push(res)
+        }
+    }) */
+
+ /*  let len = cart.length
+   let leng = finalItem.length*/
+
+  /*   for(let i = 0 ; i < cart.length ; i++){
+       for(let j = 0 ; j <= finalItem.length ; j++){
+            if(finalItem.length === 0) {
+        debugger;      setFinalItem(cart[i])
+               console.log(cart[0])
+                 console.log(finalItem)
+            }
+           else if(Number(cart[i].id) !== Number(finalItem[j].id))
+                setFinalItem([...finalItem, cart[i]])
+        }
+    } */
+
+
+
+
+
+   // finalItem = [... new Set(cart)] 
+
+   // console.log(finalItem)
+ /* useEffect(() => {
+
+  },[totalPrice])*/
+    
+
+
+   
+   console.log(totalPrice)
     if(cart.length === 0){
         return(
             <div className=" text-center mt-32">

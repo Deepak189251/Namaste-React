@@ -12,14 +12,16 @@ import { TotalPriceData } from "../utils/PriceContext"
 
 const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
-    const {cart, setCart} = useContext(CartData)
+    const {cart} = useContext(CartData)
     const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
     const onlineStatus = useOnlineStatus();
     const [mouseHover, setMouseHover] = useState(false)
 
     //console.log(mouseHover)
-   // setTotalPrice(cart.reduce((acc, curr) => acc + curr.price/100 , 0));
-   setTotalPrice(cart.reduce((acc, curr) => acc + curr.price ? curr.price/100 : curr.defaultPrice/100 , 0));
+    setTotalPrice(cart.reduce((acc, curr) => {
+      curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
+      return acc
+   }, 0));
     //const {state: {cart} } = CartState();
 
     return(
@@ -48,7 +50,7 @@ const Header = () => {
              ?
               
              (<div className=" mt-3 " >
-              {cart.map((res) => (<div className="flex justify-between"> 
+              {cart.map((res, index) => (<div className="flex justify-between " key={index}> 
                        {/*<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={res.imageId} alt=""></img></div>*/}
                        <div className=" ml-[25px] ">
                             <span>{res.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
@@ -70,9 +72,9 @@ const Header = () => {
                        
                <div></div>
              </div>)
-
-
-             :
+              
+             
+             : 
 
               (<div>
                 <h3 className=" ml-[50px] text-2xl font-bold mb-3 mt-[35px] text-[#7e808c]">Cart Empty!</h3>
@@ -87,4 +89,4 @@ const Header = () => {
     )
  }
 
- export default Header
+ export default Header 
