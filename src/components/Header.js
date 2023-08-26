@@ -6,23 +6,24 @@ import { faShoppingCart, faCircle, faSquareCaretUp  } from "@fortawesome/free-so
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartData } from "../utils/Context"
 import CartItems from "./CartItems"
-//import { CartState } from "../utils/Context"
+import { CartState } from "../utils/Context"
 import { TotalPriceData } from "../utils/PriceContext"
 
 
 const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
-    const {cart} = useContext(CartData)
-    const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
+   // const {cart} = useContext(CartData)
+   // const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
+   const [Price, setPrice] = useState(0)
     const onlineStatus = useOnlineStatus();
     const [mouseHover, setMouseHover] = useState(false)
-
+    const {state: {cart} } = CartState();
     //console.log(mouseHover)
-    setTotalPrice(cart.reduce((acc, curr) => {
+   /* setTotalPrice(cart.reduce((acc, curr) => {
       curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
       return acc
-   }, 0));
-    //const {state: {cart} } = CartState();
+   }, 0)); */
+   setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
 
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
@@ -64,7 +65,7 @@ const Header = () => {
                      
                     <hr className=" mt-3 "></hr>
                     <div className=" ml-4 mt-3">
-                      <span className=" text-sm font-semibold text-black">Sub total: </span> <span className=" ml-[180] text-sm font-semibold text-black">{parseFloat(totalPrice.toFixed(0))}</span>
+                      <span className=" text-sm font-semibold text-black">Sub total: </span> <span className=" ml-[180] text-sm font-semibold text-black">{parseFloat(Price.toFixed(0))}</span>
                       <p className=" text-xs text-[#93959f] ">Exra charges may apply</p>
                     </div>
 

@@ -1,23 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { restaurantLogoUrl } from "../utils/constant";
 import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
-import { CartData } from "../utils/Context";
-//import { CartState } from "../utils/Context";
-
+//import { useContext, useState } from "react";
+//import { CartData } from "../utils/Context";
+import { CartState } from "../utils/Context";
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, itemAttribute, id} = props.response
 
   //let [quantity, setquantity] = useState(1)
    //let quantity = 1
-   // const {state : {cart}, dispatch} = CartState();
+    const {state : {cart}, dispatch} = CartState();
 
    
 
    
   
    //console.log(props.response)
-   const {cart, setCart} = useContext(CartData);
+ //  const {cart, setCart} = useContext(CartData);
   // const [click, setClick] = useState(false)
   
    
@@ -34,25 +33,25 @@ const MenuItems = (props) => {
   })*/
 
    const addToCart = () => {
-    /*  dispatch({
+      dispatch({
          type: "Add",
          payload: props.response
-      })*/
+      })
 
-      setCart([...cart, props.response])
+     // setCart([...cart, props.response])
      // quantity = quantity + 1
      // console.log(cart)
    }
 
    const removeFromCart = () =>{
-    /*  dispatch({
+      dispatch({
          type:"Remove",
          payload: props.response
-      })*/
+      })
 
-      setCart(cart.filter((res) => {
+      /*setCart(cart.filter((res) => {
          return Number(res.id) !== Number(id)
-      }))
+      }))*/
       //quantity = quantity - 1 
       
    }
@@ -110,7 +109,7 @@ const MenuItems = (props) => {
          {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
        {cart.some(p => p.id === id) ? 
         (<div className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></div>) 
-       /* (<div className=" w-[100%] text-red-600 font-medium text-lg ">
+        /*(<div className=" w-[100%] text-red-600 font-medium text-lg ">
          
            <span onClick={quantity === 1 ? removeFromCart : decreaseQuantity}>-</span>
            <span>{quantity}</span>

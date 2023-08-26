@@ -1,26 +1,24 @@
 import { restaurantLogoUrl } from "../utils/constant"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
-import { useContext, useState, useEffect } from "react"
-import { CartData } from "../utils/Context"
-import { TotalPriceData } from "../utils/PriceContext"
-
-
+//import { useContext, useState, useEffect } from "react"
+//import { CartData } from "../utils/Context"
+//import { TotalPriceData } from "../utils/PriceContext"
 import { CartState } from "../utils/Context"
 
 const CartItems = ({res}) => {
-    let [quantity, setquantity] = useState(1)
-    const {cart, setCart} = useContext(CartData)
-    const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
+   // let [quantity, setquantity] = useState(1)
+   // const {cart, setCart} = useContext(CartData)
+  //  const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
 
  
-    const quantityIncrement = () => {
+  /*  const quantityIncrement = () => {
         setquantity(quantity = quantity + 1)
     }
 
     const quantityDecrement = () => {
         setquantity(quantity = quantity - 1)
-    }
+    }   */
   // const{state: {cart}, dispatch} = CartState()
    // console.log(quantity)
 
@@ -29,6 +27,9 @@ const CartItems = ({res}) => {
         return acc * quantity
      }, 0));*/
 
+
+
+     const {state: {cart}, dispatch} = CartState()
     
 
     const {imageId, name, price, id, defaultPrice} = res
@@ -36,15 +37,13 @@ const CartItems = ({res}) => {
     
 
     const removeFromCart = () =>{
-        setCart(cart.filter((res) => Number(id) !== Number(res.id)))
-      /*  dispatch({
+       // setCart(cart.filter((res) => Number(id) !== Number(res.id)))
+        dispatch({
             type: "Remove",
             payload: res
-        })*/
+        })
      }
-     useEffect(() => {
-        setTotalPrice(totalPrice + price * quantity)
-     }, [quantity])
+   
     
      
      
