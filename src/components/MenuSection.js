@@ -12,7 +12,7 @@ const MenuSection = (props)=> {
     const show = props.show
     const index = props.no
     const filterbtn = props.filter
-    console.log(filterbtn)
+   // console.log(filterbtn)
    // console.log(item)
    if(categories != undefined){
       categories.map((res) => {
@@ -33,7 +33,7 @@ const MenuSection = (props)=> {
      return res.card.info.itemAttribute.vegClassifier === "VEG"
    })
 
-   console.log(productList)
+   //console.log(productList)
 
    
     return ( 
