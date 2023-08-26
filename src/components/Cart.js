@@ -10,13 +10,13 @@ import { TotalPriceData }  from "../utils/PriceContext";
 const Cart = () =>{
     
    // const [price, setPrice] = useState(0)
-    const {cart, setCart} = useContext(CartData)
+   // const {cart, setCart} = useContext(CartData)
     const {totalPrice} = useContext(TotalPriceData)
     //const [finalItem, setFinalItem] = useState([])
 
     // let finalItem = []
 
-   // const{state: {cart}, dispatch} = CartState();
+    const{state: {cart}, dispatch} = CartState();
    
  /*   console.log(cart)
 

@@ -18,10 +18,10 @@ const Header = () => {
     const [mouseHover, setMouseHover] = useState(false)
 
     //console.log(mouseHover)
-    setTotalPrice(cart.reduce((acc, curr) => {
+  /*  setTotalPrice(cart.reduce((acc, curr) => {
       curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
       return acc
-   }, 0));
+   }, 0));*/
     //const {state: {cart} } = CartState();
 
     return(
@@ -42,16 +42,16 @@ const Header = () => {
 
  {/*<span onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[120px] ml-2 pt-4 my-auto"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> */}
              
-          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> 
+          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {/*`(${cart.length})`*/}</Link> 
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">
               
-              {cart.length > 0 
+            {/*cart.length > 0 
              
              ?
               
              (<div className=" mt-3 " >
               {cart.map((res, index) => (<div className="flex justify-between " key={index}> 
-                       {/*<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={res.imageId} alt=""></img></div>*/}
+                       {<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={res.imageId} alt=""></img></div>}
                        <div className=" ml-[25px] ">
                             <span>{res.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
                             <span className=" text-xs ml-3 font-semibold text-black">{res.name.substring(0, 20) + "..."}</span>
@@ -81,7 +81,7 @@ const Header = () => {
                 <p className=" ml-[45px] mr-[35px] mb-[30px] text-[#93959f]">Good food is always cooking go ahead, order some yummy items from menu</p>
               </div>)
               
-              }</div>)}
+              */}</div>)}
               </li> 
               </ul>
          </div>
