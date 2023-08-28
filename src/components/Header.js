@@ -1,29 +1,39 @@
 import { headerLogoUrl } from "../utils/constant"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
 import { faShoppingCart, faCircle, faSquareCaretUp  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartData } from "../utils/Context"
 import CartItems from "./CartItems"
-//import { CartState } from "../utils/Context"
+import { CartState } from "../utils/Context"
 import { TotalPriceData } from "../utils/PriceContext"
+import { restaurantLogoUrl } from "../utils/constant"
 
 
 const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
-    const {cart} = useContext(CartData)
-    const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
+   // const {cart} = useContext(CartData)
+   // const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
     const onlineStatus = useOnlineStatus();
     const [mouseHover, setMouseHover] = useState(false)
-
+    const [Price, setPrice] = useState(0)
     //console.log(mouseHover)
   /*  setTotalPrice(cart.reduce((acc, curr) => {
       curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
       return acc
    }, 0));*/
-    //const {state: {cart} } = CartState();
+    const {state: {cart} } = CartState();
 
+    //setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
+    useEffect(() => {
+      setPrice(cart.reduce((acc, curr) => curr.price ? acc = acc + curr.price /100 * curr.qty : acc = acc + curr.defaultPrice / 100 * curr.qty , 0))
+    })
+
+
+    const CartLength = cart.reduce((acc, curr) => (acc = acc + curr.qty), 0)
+
+    
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
         <div className="logo-container h-[100px] ml-16">
@@ -42,29 +52,29 @@ const Header = () => {
 
  {/*<span onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[120px] ml-2 pt-4 my-auto"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> */}
              
-          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {/*`(${cart.length})`*/}</Link> 
+          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${CartLength})`}</Link> 
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">
               
-            {/*cart.length > 0 
+            {cart.length > 0 
              
              ?
               
              (<div className=" mt-3 " >
               {cart.map((res, index) => (<div className="flex justify-between " key={index}> 
-                       {<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={res.imageId} alt=""></img></div>}
-                       <div className=" ml-[25px] ">
+                       {/*<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={restaurantLogoUrl + res.imageId} alt=""></img></div>*/}
+                       <div className="ml-[20px]">
                             <span>{res.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
-                            <span className=" text-xs ml-3 font-semibold text-black">{res.name.substring(0, 20) + "..."}</span>
+                            <span className=" text-xs  font-semibold text-black ml-3">{res.name.substring(0, 20) + "... " + "x " + res.qty}</span>
                         </div>
                         <div>
-                            <span className=" text-xs  mr-[20px] font-medium text-[#93959f]">{res.price ? parseFloat( (res.price / 100).toFixed(0)): parseFloat( (res.defaultPrice / 100).toFixed(0))}</span>
+                            <span className=" text-xs  mr-[20px] font-medium text-[#93959f]">{res.price ? parseFloat( (res.price / 100 * res.qty).toFixed(0)): parseFloat( (res.defaultPrice / 100 * res.qty).toFixed(0))}</span>
                             </div>
                        
                     </div>))}
                      
                     <hr className=" mt-3 "></hr>
                     <div className=" ml-4 mt-3">
-                      <span className=" text-sm font-semibold text-black">Sub total: </span> <span className=" ml-[180] text-sm font-semibold text-black">{parseFloat(totalPrice.toFixed(0))}</span>
+                      <span className=" text-sm font-semibold text-black">Sub total: </span> <span className=" ml-[180] text-sm font-semibold text-black">{parseFloat(Price.toFixed(0))}</span>
                       <p className=" text-xs text-[#93959f] ">Exra charges may apply</p>
                     </div>
 
@@ -81,7 +91,7 @@ const Header = () => {
                 <p className=" ml-[45px] mr-[35px] mb-[30px] text-[#93959f]">Good food is always cooking go ahead, order some yummy items from menu</p>
               </div>)
               
-              */}</div>)}
+              }</div>)}
               </li> 
               </ul>
          </div>
