@@ -11,7 +11,7 @@ const MenuItems = (props) => {
    //let quantity = 1
     const {state : {cart}, dispatch} = CartState();
 
-   
+    console.log(cart.length)
 
    
   
@@ -38,7 +38,7 @@ const MenuItems = (props) => {
          payload: props.response
       })
 
-     // setCart([...cart, props.response])
+    //  setCart([...cart, props.response])
      // quantity = quantity + 1
      // console.log(cart)
    }
@@ -49,7 +49,7 @@ const MenuItems = (props) => {
          payload: props.response
       })
 
-      /*setCart(cart.filter((res) => {
+    /*  setCart(cart.filter((res) => {
          return Number(res.id) !== Number(id)
       }))*/
       //quantity = quantity - 1 
@@ -57,16 +57,24 @@ const MenuItems = (props) => {
    }
 
   /* const decreaseQuantity = () => {
-      setquantity(quantity-1)
+      dispatch({
+         type: "Decrement_Qty",
+         payload: props.response
+      })
    }
  
    const increaseQuantity = () => {
-      setquantity(quantity+1)
+      dispatch({
+         type: "Increment_Qty",
+         payload: props.response
+      })
    }*/
-  // console.log(quantity)
+ 
 
-
-  // const [product, setProduct] = useState({Item: props.response, qty: quantity})
+  
+  //  let getQuantity = cart[0].qty
+  console.log(cart[0])
+ // console.log(getQuantity)
  
   // console.log(product)
 
@@ -109,18 +117,20 @@ const MenuItems = (props) => {
          {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
        {cart.some(p => p.id === id) ? 
         (<div className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></div>) 
-        /*(<div className=" w-[100%] text-red-600 font-medium text-lg ">
-         
-           <span onClick={quantity === 1 ? removeFromCart : decreaseQuantity}>-</span>
-           <span>{quantity}</span>
+       /* (<div className=" w-[100%] text-red-600 font-medium text-lg ">
+          
+           <span onClick={decreaseQuantity}>-</span>
+           <span>{ }</span>
            <span onClick={increaseQuantity}>+</span>
-
+           { }
          </div>) */
 
          :
 
        ( <div className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</div>)
+      
       }
+       
         </div>
        
         {/*console.log(cart)*/}

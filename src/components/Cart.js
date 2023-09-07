@@ -10,12 +10,10 @@ import { CartState } from "../utils/Context";
 
 const Cart = () =>{
     
-   // const [price, setPrice] = useState(0)
-   // const {cart, setCart} = useContext(CartData)
-   // const {totalPrice} = useContext(TotalPriceData)
-    //const [finalItem, setFinalItem] = useState([])
     const [Price, setPrice] = useState(0)
-    // let finalItem = []
+   // const {cart, setCart} = useContext(CartData)
+    const {totalPrice} = useContext(TotalPriceData)
+    //const [finalItem, setFinalItem] = useState([])
 
     const{state: {cart}, dispatch} = CartState();
    
@@ -62,19 +60,17 @@ const Cart = () =>{
         setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
      }, [])
 
-
-
    // finalItem = [... new Set(cart)] 
 
    // console.log(finalItem)
- /* useEffect(() => {
-
-  },[totalPrice])*/
+  useEffect(() => {
+    setPrice(cart.reduce((acc, curr) => curr.price ? acc = acc + curr.price /100 * curr.qty : acc = acc + curr.defaultPrice / 100 * curr.qty , 0))
+  })
     
 
 
-   
-   console.log(totalPrice)
+  
+   //console.log(totalPrice)
     if(cart.length === 0){
         return(
             <div className=" text-center mt-32">
@@ -102,7 +98,7 @@ const Cart = () =>{
         <div className="priceContainer w-[260px] ml-[620px]">
             <div className=" border-b-2 pb-2 pt-2">
                 <span className=" mr-[133px] font-semibold text-sm">Subtotal :</span>
-                <span className="text-sm font-semibold ">{parseFloat(totalPrice.toFixed(2))}</span>
+                <span className="text-sm font-semibold ">{parseFloat(Price.toFixed(2))}</span>
             </div>
             <div className="border-b-2 pb-2 pt-2">
                 <span className=" mr-[65px] text-sm font-semibold">Delivery charges :  <FontAwesomeIcon icon={faCircleInfo}/> </span>
@@ -110,7 +106,7 @@ const Cart = () =>{
             </div>
             <div className="border-b-2 pb-2 pt-2">
                 <span className="mr-[100px] font-semibold">Grandtotal : </span>
-                <span className=" font-bold text-base text-left">{parseFloat(totalPrice.toFixed(2)) + 10}</span>
+                <span className=" font-bold text-base text-left">{parseFloat(Price.toFixed(2)) + 10}</span>
             </div>
 
         </div>
