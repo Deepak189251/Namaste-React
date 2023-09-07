@@ -4,6 +4,7 @@ import { faCircleXmark, faPlus, faMinus} from "@fortawesome/free-solid-svg-icons
 import { useContext, useState, useEffect } from "react"
 import { CartData } from "../utils/Context"
 import { TotalPriceData } from "../utils/PriceContext"
+import { CartState } from "../utils/Context"
 
 
 import { CartState } from "../utils/Context"
@@ -38,6 +39,9 @@ const CartItems = ({res}) => {
         return acc * quantity
      }, 0));*/
 
+
+
+    // const {state: {cart}, dispatch} = CartState()
     
 
     const {imageId, name, price, id, defaultPrice, qty} = res

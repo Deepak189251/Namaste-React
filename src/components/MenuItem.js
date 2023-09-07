@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { restaurantLogoUrl } from "../utils/constant";
 import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
-import { CartData } from "../utils/Context";
+//import { useContext, useState } from "react";
+//import { CartData } from "../utils/Context";
 import { CartState } from "../utils/Context";
-
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, itemAttribute, id} = props.response
 
