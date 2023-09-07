@@ -1,4 +1,4 @@
-import RestruantCard, {promotedRestaurant} from "./RestaurantCard"
+import RestruantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
 import { api } from "../utils/constant"

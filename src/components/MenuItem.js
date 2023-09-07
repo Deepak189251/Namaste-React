@@ -4,7 +4,6 @@ import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-
 //import { useContext, useState } from "react";
 //import { CartData } from "../utils/Context";
 import { CartState } from "../utils/Context";
-
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, itemAttribute, id} = props.response
 

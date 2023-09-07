@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from "react"
-import { CartData } from "../utils/Context"
+//import { CartData } from "../utils/Context"
 import { Link } from "react-router-dom";
 import CartItems from "./CartItems";
 import { CartState } from "../utils/Context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { TotalPriceData }  from "../utils/PriceContext";
+//import { TotalPriceData }  from "../utils/PriceContext";
+import { CartState } from "../utils/Context";
 
 const Cart = () =>{
     
@@ -55,7 +56,9 @@ const Cart = () =>{
         }
     } */
 
-
+    useEffect(() => {
+        setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
+     }, [])
 
    // finalItem = [... new Set(cart)] 
 
