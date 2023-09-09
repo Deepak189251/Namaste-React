@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 //import About from "./components/About";
-import ContactUs from "./components/Contact";
+import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurnatMenu";
 import Shimmer from "./components/Shimmer";
@@ -44,7 +44,7 @@ const AppRouter = createBrowserRouter([
          },
          {
             path: "/contactus",
-            element: <ContactUs/>
+            element: <Contact/>
          },
          {
             path: "/cart",
