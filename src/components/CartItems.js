@@ -7,7 +7,7 @@ import { TotalPriceData } from "../utils/PriceContext"
 import { CartState } from "../utils/Context"
 
 
-import { CartState } from "../utils/Context"
+//import { CartState } from "../utils/Context"
 
 const CartItems = ({res}) => {
    // let [quantity, setquantity] = useState(1)
