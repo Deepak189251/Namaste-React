@@ -8,7 +8,7 @@ it("should render ", () => {
     const res = screen.getByRole("heading")
     
     console.log(res)
-
+    
     expect(res).toBeInTheDocument()
 });
 
@@ -17,4 +17,4 @@ it("should render input", () => {
     const name = screen.getByRole("textbox")
 
     expect(name).toBeInTheDocument()
-})
+});
