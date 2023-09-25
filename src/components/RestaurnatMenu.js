@@ -62,6 +62,8 @@ const RestaurantMenu = () => {
         return <Shimmer />
     }
 
+    console.log(resInfo)
+
 
 
     const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo.data?.cards[0]?.card?.card?.info

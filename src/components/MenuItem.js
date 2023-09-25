@@ -5,13 +5,13 @@ import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-
 //import { CartData } from "../utils/Context";
 import { CartState } from "../utils/Context";
 const MenuItems = (props) => {
-   const {name, imageId, price, description, defaultPrice, itemAttribute, id} = props.response
+   const {name, imageId, price, description, defaultPrice, isVeg, id} = props.response
 
   //let [quantity, setquantity] = useState(1)
    //let quantity = 1
     const {state : {cart}, dispatch} = CartState();
 
-    console.log(cart.length)
+   // console.log(cart.length)
 
    
   
@@ -73,19 +73,28 @@ const MenuItems = (props) => {
 
   
   //  let getQuantity = cart[0].qty
-  console.log(cart[0])
+  //console.log(cart[0])
  // console.log(getQuantity)
  
   // console.log(product)
 
- console.log(itemAttribute)
+ //console.log(itemAttribute)
  let productIcon 
-   if(itemAttribute.vegClassifier === "VEG"){
+ /*  if(itemAttribute.vegClassifier === "VEG"){
+      productIcon = <FontAwesomeIcon icon={faCircle} style={{color: "green"}}/>
+   }
+   else{
+      productIcon = <FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}}/>
+   }*/
+
+
+   if(isVeg) {
       productIcon = <FontAwesomeIcon icon={faCircle} style={{color: "green"}}/>
    }
    else{
       productIcon = <FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}}/>
    }
+
     return(
   /*  <div className="menu-container">
         <div className="recommended-section">

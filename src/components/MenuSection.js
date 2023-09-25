@@ -19,6 +19,7 @@ const MenuSection = (props)=> {
         itemCards = res.itemCards;
       })
    }
+   //console.log(itemCards)
     
   //  console.log(categories+ " categories")
    
@@ -29,11 +30,15 @@ const MenuSection = (props)=> {
       setShow(!show)
     } */
     
-   const productList = itemCards.filter((res) => {
+  /* const productList = itemCards.filter((res) => {
      return res.card.info.itemAttribute.vegClassifier === "VEG"
-   })
+   }) */
 
-   //console.log(productList)
+   const productList = itemCards.filter((res) => {
+     return res.card.info.isVeg === 1
+  })
+
+   console.log(productList)
 
    
     return ( 
