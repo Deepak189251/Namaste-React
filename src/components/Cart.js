@@ -12,7 +12,7 @@ const Cart = () =>{
     
     const [Price, setPrice] = useState(0)
    // const {cart, setCart} = useContext(CartData)
-   // const {totalPrice} = useContext(TotalPriceData)
+   //    const {totalPrice} = useContext(TotalPriceData)
     //const [finalItem, setFinalItem] = useState([])
 
     const{state: {cart}, dispatch} = CartState();
