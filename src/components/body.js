@@ -34,8 +34,8 @@ const Body = () => {
        const data = await fetch(api);
        const jsondata = await data.json()
        console.log(jsondata)
-       setRestaurantList(jsondata?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-       setFilteredRestaurant(jsondata?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+       setRestaurantList(jsondata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+       setFilteredRestaurant(jsondata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
        
    }   
      
@@ -56,7 +56,7 @@ const Body = () => {
 
    
     
-   if(restaurantList.length === 0){
+   if(restaurantList?.length === 0){
       return <Shimmer/>
    } 
 
