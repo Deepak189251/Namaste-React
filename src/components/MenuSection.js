@@ -22,7 +22,7 @@ const MenuSection = (props)=> {
     /* productList = categories.map((res) => {
        return res.itemCards
         })*/
-      {console.log("nested")}
+      {/*console.log("nested")*/}
       <section className="menu-container text-center">
       
 
@@ -64,13 +64,13 @@ const MenuSection = (props)=> {
       setShow(!show)
     } */
     
- /*  const productList = itemCards.filter((res) => {
-    return res.card.info.itemAttribute.vegClassifier === "VEG"
+   const productList = itemCards.filter((res) => {
+    return res?.card?.info?.itemAttribute?.vegClassifier !== "NONVEG"
   }) 
 
- 
+  console.log(itemCards)
 
-  console.log(productList)*/
+  console.log(productList)
 
   /* 
     if(reso)
