@@ -17,7 +17,7 @@ const RestaurantMenu = () => {
     const {resId} = useParams();
    // console.log(resId)
 
-   const [show, setShow] = useState(true);
+   const [show, setShow] = useState(false);
    const [showIndex, setShowIndex] = useState(null)
 
    const changeShow = (index, shown)=> {
@@ -26,7 +26,7 @@ const RestaurantMenu = () => {
   }
 
  /*   useEffect(() => {
-       fetchInfo();
+       fetchInfo(); 
     }, []);
    */ 
     
@@ -51,7 +51,7 @@ const RestaurantMenu = () => {
 
 
 
-    const {resInfo} = useRestaurantMenu(resId)
+    const resInfo = useRestaurantMenu(resId)
    // let filteredSection = []
    // console.log(typeof menu)
 
@@ -66,13 +66,13 @@ const RestaurantMenu = () => {
 
 
 
-    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo.data?.cards[0]?.card?.card?.info
+    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo.data?.cards[2]?.card?.card?.info
 
-    const {lastMileTravelString, slaString} = resInfo.data?.cards[0]?.card?.card?.info?.sla
+    const {lastMileTravelString, slaString} = resInfo.data?.cards[2]?.card?.card?.info?.sla
 
-    const filteredSection = resInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(res=> {
+    const filteredSection = resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(res=> {
 
-      return res?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      return res?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" || res?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
     })
 
     console.log(filteredSection)
