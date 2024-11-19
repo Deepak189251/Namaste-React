@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 const RestruantCard = (props) => {
-   console.log(props)
+  // console.log(props)
+  // console.log(restaurantLogoUrl)
     const {name, cuisines, avgRating, sla, cloudinaryImageId, id, costForTwo} = props.resdata.info
    
     return (

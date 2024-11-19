@@ -33,7 +33,7 @@ const fetchInfo = async () => {
  /* setFilteredSection(menu.filter((res) => {
     return res.card.card["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   }))*/
-    return {resInfo};
+    return resInfo ;
 }
 
 export default useRestaurantMenu;
