@@ -23,6 +23,7 @@ const MenuSection = (props)=> {
        return res.itemCards
         })*/
       {/*console.log("nested")*/}
+      return (
       <section className="menu-container text-center">
       
 
@@ -31,8 +32,8 @@ const MenuSection = (props)=> {
           <button className="menu-btn border-none m-0 p-0 bg-none text-inherit cursor-pointer outline-none" >{show? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown}/>}</button>
         </div>
         <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
-        {show && <div className="answer"> {categories.map((res, index) => {
-           return <MenuSubSection key= {index} response= {res}/>
+        {show && <div className="answer w-[680px] m-auto"> {categories.map((res, index) => {
+           return <MenuSubSection key= {index} response= {res} filter={filterbtn}/>
         })}
         
           
@@ -43,7 +44,7 @@ const MenuSection = (props)=> {
     }))} */}
       </div>}
     </section> 
-      
+      )
    }
    else{
      
@@ -85,7 +86,7 @@ const MenuSection = (props)=> {
       <button className="menu-btn border-none m-0 p-0 bg-none text-inherit cursor-pointer outline-none" >{show? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown}/>}</button>
      </div>
      <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
-       {show && <div className="answer">  {filterbtn ? (productList.map((res, index)=>{
+       {show && <div className="answer w-[680px] m-auto">  {filterbtn ? (productList.map((res, index)=>{
      return <MenuItems key= {index} response = {res.card.info}/>
    })) : (  itemCards.map((res, index)=>{
      return <MenuItems key= {index} response = {res.card.info}/>
