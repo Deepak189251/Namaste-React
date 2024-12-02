@@ -85,7 +85,7 @@ const Cart = () =>{
         <div >
         <h3 className=" text-center mb-10 text-xl font-extrabold mt-4">Your Cart</h3>
         <div className="heading flex  w-[600px] mb-4 m-auto text-sm font-bold">
-            <div className="  mr-[290px]">Added Items</div>
+            <div className="  mr-[310px]">Added Items</div>
             <div className=" mr-[35px]">Quantity</div>
             <div>Price</div>
         </div>
@@ -94,8 +94,8 @@ const Cart = () =>{
                return <CartItems key={index} res={res}/>
             })}
         </div>
-     <div className=" flex">
-        <div className="priceContainer w-[260px] ml-[620px]">
+     <div className=" flex justify-center">
+        <div className="priceContainer w-[260px] mt-[10px]">
             <div className=" border-b-2 pb-2 pt-2">
                 <span className=" mr-[133px] font-semibold text-sm">Subtotal :</span>
                 <span className="text-sm font-semibold ">{parseFloat(Price.toFixed(2))}</span>

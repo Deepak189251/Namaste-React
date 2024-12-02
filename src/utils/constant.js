@@ -3,8 +3,12 @@ export const headerLogoUrl = "https://images-workbench.99static.com/uNN5i13HsdTZ
 
 export const restaurantLogoUrl = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
 
-export const menuApi = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.385044&lng=78.486671&restaurantId=`
+//export const menuApi = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.385044&lng=78.486671&restaurantId=`
 
+export const menuApi = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.319436&lng=85.829222&restaurantId=`
+
+
+export const foodImgPlaceholder = "https://thumbs.dreamstime.com/b/healthy-food-background-salad-ingredients-various-dressing-blank-plate-top-view-diet-eating-vegetarian-vegan-84723079.jpg"
 
 /*
 Api for Home location Restaurant Menu 
@@ -33,4 +37,6 @@ https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&la
 */
 
 
-export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+//export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+
+export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.319436&lng=85.829222&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"

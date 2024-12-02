@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { restaurantLogoUrl } from "../utils/constant";
+import { restaurantLogoUrl, foodImgPlaceholder } from "../utils/constant";
 import { faCircle, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 //import { useContext, useState } from "react";
 //import { CartData } from "../utils/Context";
 import { CartState } from "../utils/Context";
+
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, isVeg, id} = props.response
 
@@ -38,6 +39,7 @@ const MenuItems = (props) => {
          payload: props.response
       })
 
+      console.log(props?.response?.imageId)
     //  setCart([...cart, props.response])
      // quantity = quantity + 1
      // console.log(cart)
@@ -116,12 +118,12 @@ const MenuItems = (props) => {
       <p>{productIcon}</p>
       <h6 className="product-name mb-0 font-semibold">{name}</h6>
       <p className="product-price pb-[10px] text-sm font-normal"> &#8377;{price?  price/100 :  defaultPrice/100}</p>
-      <p className="product-desc pr-2 text-xs font-light">{description}</p>
+      <p className="product-desc pr-2 text-xs font-normal">{description}</p>
     </div>
   <div>
    
       <div className="product-imgdiv w-[110px] ml-6 relative">
-        <img className="product-img w-[100%] h-24 rounded-md" src={restaurantLogoUrl + imageId}/>
+        <img className="product-img w-[100%] h-24 rounded-md" src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
         <div className="absolute bottom-[-6px] right-[11px] py-[7px] px-[32px] bg-white shadow-md  rounded-sm text-center cursor-pointer">
          {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
        {cart.some(p => p.id === id) ? 

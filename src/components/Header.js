@@ -9,7 +9,7 @@ import CartItems from "./CartItems"
 import { CartState } from "../utils/Context"
 import { TotalPriceData } from "../utils/PriceContext"
 import { restaurantLogoUrl } from "../utils/constant"
-
+import { useNavigate } from "react-router-dom"
 
 const Header = () => {
     const [logBtn, setLogBtn] = useState("LogIn")
@@ -18,6 +18,7 @@ const Header = () => {
     const onlineStatus = useOnlineStatus();
     const [mouseHover, setMouseHover] = useState(false)
     const [Price, setPrice] = useState(0)
+    const navigate = useNavigate()
     //console.log(mouseHover)
   /*  setTotalPrice(cart.reduce((acc, curr) => {
       curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
@@ -25,10 +26,14 @@ const Header = () => {
    }, 0));*/
     const {state: {cart} } = CartState();
 
+   const location = localStorage.getItem("foodCourt")
+   
+
     //setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
     useEffect(() => {
       setPrice(cart.reduce((acc, curr) => curr.price ? acc = acc + curr.price /100 * curr.qty : acc = acc + curr.defaultPrice / 100 * curr.qty , 0))
-    })
+      if(!location) navigate("/")
+    },[])
 
 
     const CartLength = cart.reduce((acc, curr) => (acc = acc + curr.qty), 0)
@@ -37,17 +42,13 @@ const Header = () => {
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
         <div className="logo-container h-[100px] ml-16">
-          <img className="w-[100] bg-transparent" src={headerLogoUrl} alt="logo" />
+          <img className="w-[100] bg-transparent" src={headerLogoUrl}  alt="logo" />
          </div>
          <div className="nav-items ml-[200px] flex">
           <ul className="flex  items-center mr-[100px]">
-             <li className="px-4 ">{(onlineStatus) ? "✅" : "🔴"}</li>
              <li className="px-4 hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/"}>Home</Link></li>
              <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/about"}>About</Link></li>
              <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/contactus"}>Contact Us</Link></li>
-             <button className="nav-btn px-4  hover:text-orange-500 text-lg font-bold" onClick={() => {
-              logBtn === "LogIn" ? setLogBtn ("LogOut") : setLogBtn ("LogIn")
-             }}>{logBtn}</button> 
 
 
  {/*<span onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[120px] ml-2 pt-4 my-auto"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> */}

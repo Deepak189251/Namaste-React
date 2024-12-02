@@ -22,13 +22,16 @@ const Body = () => {
 
 
   // const promotedRestaurant = promotedRestaurant(RestruantCard)
-   console.log(useState());
+   
   
    useEffect(() => {
       fetchData()
       
    },[]);
-    
+    const location = JSON.parse(localStorage.getItem("foodCourt"))
+    const long = location.long
+    const lat = location.lat
+    console.log(long + " " + lat)
 
    const fetchData = async () => {
        const data = await fetch(api);
