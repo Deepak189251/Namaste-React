@@ -1,7 +1,7 @@
 import RestruantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { useState, useEffect } from "react"
-import { api } from "../utils/constant"
+//import { api } from "../utils/constant"
 import useOnlineStatus from "../utils/useOnlineStatus"
 //import useRestaurantList from "../utils/useRestaurantList"
 
@@ -29,12 +29,10 @@ const Body = () => {
       
    },[]);
     const location = JSON.parse(localStorage.getItem("foodCourt"))
-    const long = location.long
-    const lat = location.lat
-    console.log(long + " " + lat)
+    console.log(location)
 
    const fetchData = async () => {
-       const data = await fetch(api);
+       const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat="+ location?.lat +"&lng="+ location?.long +"&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
        const jsondata = await data.json()
        console.log(jsondata)
        setRestaurantList(jsondata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
