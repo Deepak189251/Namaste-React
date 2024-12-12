@@ -56,10 +56,6 @@ const Cart = () =>{
         }
     } */
 
-    useEffect(() => {
-        setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
-     }, [])
-
    // finalItem = [... new Set(cart)] 
 
    // console.log(finalItem)

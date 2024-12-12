@@ -2,10 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLocationDot, faAngleDown, faAngleUp, faLocationArrow  } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import Body from "./body"
+import { data } from "../utils/List"
 const LandingPage = () => {
 
     const [show, setShow] = useState(false)
     const [refresh, setRefresh] = useState(false)
+    const [search, setSearch] = useState("")
+    const [result, setResult] = useState("")
 
     function locationSuccess (position) {
        // console.log(position?.coords?.longitude)
@@ -31,6 +34,42 @@ const LandingPage = () => {
 
     }, [refresh])
 
+    const getCitydata = () => {
+
+    }
+
+    let filteredCities
+
+    if(search.length >= 2){
+         filteredCities = data.filter((city) => {
+            return search === ""
+            ? city
+            : city.toLowerCase().includes(search)
+        })
+        console.log(filteredCities.slice(0, 8))
+    }
+   /* const filteredCities = data.filter((city) => {
+        return search.toLowerCase() === ""
+        ? city
+        : city.toLowerCase().includes(search)
+    })
+    console.log(filteredCities.slice(0, 8))*/
+
+   /*const filterCity = () => {
+       const filteredCities = data.filter((city) => {
+            return search.toLowerCase() === ""
+            ? city
+            : city.toLowerCase().includes(search)
+        })
+        console.log(filteredCities.slice(0, 8))
+
+        console.log(search)
+       
+    }*/
+
+  
+    
+
     
     return( location ? <Body /> : 
         <div className=" bg-orange-600 h-[100%]">
@@ -48,17 +87,33 @@ const LandingPage = () => {
                             <FontAwesomeIcon icon={faLocationDot} className=" w-[35px] h-[25px] m-[10px]" color="orange" />
                         </div>
                         
-                        <input type="text" className=" border-none outline-none w-[195px] h-[35px] mt-[5px] mr-[10px]" placeholder="Enter your delivery location" />
+                        <input type="text" onChange={(e) => {setSearch(e.target.value.toLocaleLowerCase()), e.target.value.length >=2 ? setShow(true) : setShow(false)}} className=" border-none outline-none w-[195px] h-[35px] mt-[5px] mr-[10px]" placeholder="Enter your delivery location" />
                         
                         <div onClick={() => {setShow(!show)}}>
                            {show ? <FontAwesomeIcon className=" w-[25px] h-[20px] mt-[13px]" icon={faAngleUp}  /> : <FontAwesomeIcon className=" w-[25px] h-[20px] mt-[13px]" icon={faAngleDown}  />} 
                         </div>
 
                         {show && 
-                            <div className=" flex bg-white absolute top-[340px] w-[250px] h-[40px] rounded-lg cursor-pointer" onClick={getUserLocation}>
-                                <FontAwesomeIcon className=" w-[25px] h-[20px] m-[10px]" icon={faLocationArrow} color="orange" />
+                            <div className=" absolute top-[340px] bg-white h-[300px] overflow-y-auto rounded-md" >
+                                <div className=" flex  w-[260px] h-[40px] rounded-lg cursor-pointer" onClick={getUserLocation}>
 
-                                <p className=" h-[25px] mt-[6px] font-bold text-orange-600">Use my current location</p>
+                                    <FontAwesomeIcon className=" w-[25px] h-[20px] m-[10px]" icon={faLocationArrow} color="orange" />
+
+                                    <p className=" h-[25px] mt-[6px] font-bold text-orange-600">Use my current location</p>
+                                </div>
+
+                                <hr/>
+                                <div className="mt-[5px]">
+                                    
+
+                                    {filteredCities?.slice(0, 8)?.map((city) => 
+                                    <div className=" flex">
+                                        <FontAwesomeIcon className=" w-[25px] h-[20px] m-[10px]" icon={faLocationArrow} color="black" />
+                                        <p className=" cursor-pointer m-[8px]">{city}</p>
+
+                                    </div>)}
+                                </div>
+
                             </div>
                         }
                     </div>
