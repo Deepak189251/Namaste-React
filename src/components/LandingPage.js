@@ -3,6 +3,7 @@ import { faLocationDot, faAngleDown, faAngleUp, faLocationArrow  } from "@fortaw
 import { useEffect, useState } from "react"
 import Body from "./body"
 import { data } from "../utils/List"
+import { options } from "../utils/constant"
 const LandingPage = () => {
 
     const [show, setShow] = useState(false)
@@ -34,17 +35,29 @@ const LandingPage = () => {
 
     }, [refresh])
 
-    const getCitydata = () => {
+    
 
+    const getCitydata = async (city) => {
+        try{
+            const data = await fetch("https://api.api-ninjas.com/v1/geocoding?city="+ city +"&country=India", options)
+            const json = await data.json()
+            const location = {"long": json[0]?.longitude, "lat": json[0]?.latitude}
+            localStorage.setItem("foodCourt", JSON.stringify(location))
+            setRefresh(!refresh)
+            console.log(json)
+        }
+        catch (err){
+            console.log(err)
+        }
     }
 
     let filteredCities
 
     if(search.length >= 2){
          filteredCities = data.filter((city) => {
-            return search === ""
+            return search.toLowerCase() === ""
             ? city
-            : city.toLowerCase().includes(search)
+            : city.toLowerCase().includes(search.toLowerCase())
         })
         console.log(filteredCities.slice(0, 8))
     }
@@ -67,7 +80,12 @@ const LandingPage = () => {
        
     }*/
 
-  
+     const selectCity = (city) => {
+        console.log(city)
+        setSearch(city)
+        setShow(false)
+        getCitydata(city)
+     }
     
 
     
@@ -87,14 +105,14 @@ const LandingPage = () => {
                             <FontAwesomeIcon icon={faLocationDot} className=" w-[35px] h-[25px] m-[10px]" color="orange" />
                         </div>
                         
-                        <input type="text" onChange={(e) => {setSearch(e.target.value.toLocaleLowerCase()), e.target.value.length >=2 ? setShow(true) : setShow(false)}} className=" border-none outline-none w-[195px] h-[35px] mt-[5px] mr-[10px]" placeholder="Enter your delivery location" />
+                        <input type="text" value={search} onChange={(e) => {setSearch(e.target.value), e.target.value.length >=2 ? setShow(true) : setShow(false)}} className=" border-none outline-none w-[195px] h-[35px] mt-[5px] mr-[10px]" placeholder="Enter your delivery location" />
                         
                         <div onClick={() => {setShow(!show)}}>
                            {show ? <FontAwesomeIcon className=" w-[25px] h-[20px] mt-[13px]" icon={faAngleUp}  /> : <FontAwesomeIcon className=" w-[25px] h-[20px] mt-[13px]" icon={faAngleDown}  />} 
                         </div>
 
                         {show && 
-                            <div className=" absolute top-[340px] bg-white h-[300px] overflow-y-auto rounded-md" >
+                            <div className=" absolute top-[340px] bg-white max-h-[300px] overflow-y-auto rounded-md" >
                                 <div className=" flex  w-[260px] h-[40px] rounded-lg cursor-pointer" onClick={getUserLocation}>
 
                                     <FontAwesomeIcon className=" w-[25px] h-[20px] m-[10px]" icon={faLocationArrow} color="orange" />
@@ -107,7 +125,7 @@ const LandingPage = () => {
                                     
 
                                     {filteredCities?.slice(0, 8)?.map((city) => 
-                                    <div className=" flex">
+                                    <div className=" flex" onClick={() => selectCity(city)}>
                                         <FontAwesomeIcon className=" w-[25px] h-[20px] m-[10px]" icon={faLocationArrow} color="black" />
                                         <p className=" cursor-pointer m-[8px]">{city}</p>
 
