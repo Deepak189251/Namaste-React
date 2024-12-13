@@ -117,7 +117,7 @@ const RestaurantMenu = () => {
             return res.card.card["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
           })}
         {console.log(typeof filteredSection)} */ }
-          {filteredSection.map((res, index) => {
+          {filteredSection?.map((res, index) => {
                 return <MenuSection 
                 key={index}
                 no={index}
