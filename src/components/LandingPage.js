@@ -4,17 +4,24 @@ import { useEffect, useState } from "react"
 import Body from "./body"
 import { data } from "../utils/List"
 import { options } from "../utils/constant"
+import { useDispatch } from "react-redux"
+import { addUserLocation } from "../utils/userSlice"
 const LandingPage = () => {
 
     const [show, setShow] = useState(false)
     const [refresh, setRefresh] = useState(false)
     const [search, setSearch] = useState("")
     const [result, setResult] = useState("")
+    const dispatch = useDispatch()
+
+    const userLoc = JSON.parse(localStorage.getItem("foodCourt"))
+    dispatch(addUserLocation(userLoc))
 
     function locationSuccess (position) {
        // console.log(position?.coords?.longitude)
         const location = {"long": position?.coords?.longitude, "lat": position?.coords?.latitude}
         localStorage.setItem("foodCourt", JSON.stringify(location))
+        dispatch(addUserLocation(location))
         setRefresh(!refresh)
       }
   
