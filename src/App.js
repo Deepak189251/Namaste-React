@@ -12,16 +12,20 @@ import Cart from "./components/Cart";
 import CartContext from "./utils/Context";
 //import TotalPriceContext from "./utils/PriceContext";
 import LandingPage from "./components/LandingPage";
+import { Provider } from "react-redux";
+import store from "./utils/Store";
 const Applayout = () => {
   // const [cart, setCart] = useState([])
   
    return (
-     <CartContext>
-      <div className="app">
-        <Header/>
-        <Outlet/>
-      </div>
-     </CartContext>  
+      <Provider store={store} >
+         <CartContext>
+            <div className="app">
+               <Header/>
+               <Outlet/>
+            </div>
+         </CartContext> 
+     </Provider> 
    )
 }
 
