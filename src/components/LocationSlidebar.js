@@ -6,17 +6,20 @@ import { data } from '../utils/List'
 import { useDispatch } from 'react-redux'
 import { addUserLocation } from '../utils/userSlice'
 import { options } from '../utils/constant'
+import { useNavigate } from 'react-router-dom'
 const LocationSlidebar = ({close, show}) => {
     const [search, setSearch] = useState("")
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     function locationSuccess (position) {
        // console.log(position?.coords?.longitude)
         const location = {"long": position?.coords?.longitude, "lat": position?.coords?.latitude}
-        localStorage.setItem("foodCourt", JSON.stringify(location))
+        localStorage.setItem("userLocation", JSON.stringify(location))
         dispatch(addUserLocation(location))
         //setRefresh(!refresh)
-        window.location.reload(false)
+        navigate("/")
+        //window.location.reload(false)
+        close(!show)
     }
     function locationError (){
         console.log("There is some issue.")
@@ -30,11 +33,13 @@ const LocationSlidebar = ({close, show}) => {
             const data = await fetch("https://api.api-ninjas.com/v1/geocoding?city="+ city +"&country=India", options)
             const json = await data.json()
             const location = {"long": json[0]?.longitude, "lat": json[0]?.latitude}
-            localStorage.setItem("foodCourt", JSON.stringify(location))
+            localStorage.setItem("userLocation", JSON.stringify(location))
             //setRefresh(!refresh)
             dispatch(addUserLocation(location))
             console.log(json)
-            window.location.reload(false)
+            navigate("/")
+            close(!show)
+            //window.location.reload(false)
         }
         catch (err){
             console.log(err)
