@@ -4,45 +4,69 @@ import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
 import { faShoppingCart, faCircle, faSquareCaretUp  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { CartData } from "../utils/Context"
-import CartItems from "./CartItems"
-import { CartState } from "../utils/Context"
-import { TotalPriceData } from "../utils/PriceContext"
 import { restaurantLogoUrl } from "../utils/constant"
 import { useNavigate } from "react-router-dom"
+import LocationSlidebar from "./LocationSlidebar"
+import { useDispatch, useSelector } from "react-redux"
+import { updateCart } from "../utils/userSlice"
 
 const Header = () => {
-    const [logBtn, setLogBtn] = useState("LogIn")
+    
    // const {cart} = useContext(CartData)
    // const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
-    const onlineStatus = useOnlineStatus();
+    const [showLocation, setShowLocation] = useState(false)
     const [mouseHover, setMouseHover] = useState(false)
     const [Price, setPrice] = useState(0)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const cart = useSelector(store => store.user.userCart)
+
     //console.log(mouseHover)
   /*  setTotalPrice(cart.reduce((acc, curr) => {
       curr.price ? acc = acc + curr.price/100 : acc = acc + curr.defaultPrice/100
       return acc
    }, 0));*/
-    const {state: {cart} } = CartState();
+    //const {state: {cart} } = CartState();
 
-   const location = localStorage.getItem("foodCourt")
+   const location = localStorage.getItem("userLocation")
+   const newCart = JSON.parse(localStorage.getItem("userCart"))
+   //dispatch(addInCart(newCart))
+   if(cart?.length !== newCart?.length){
+      dispatch(updateCart(newCart))
+   }
+  /* if(cart?.length > 0){
+      
+   }*/
+
+   
+
+    //const newCart = localStorage.getItem()
+   if(!localStorage?.getItem("userCart")) {
+    localStorage?.setItem("userCart", "[]")
+    
+  }
+  
+
    
 
     //setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
     useEffect(() => {
-      setPrice(cart.reduce((acc, curr) => curr.price ? acc = acc + curr.price /100 * curr.qty : acc = acc + curr.defaultPrice / 100 * curr.qty , 0))
+      setPrice(cart.reduce((acc, curr) => curr.data.price ? acc = acc + curr.data.price /100 * curr.qty : acc = acc + curr.data.defaultPrice / 100 * curr.qty , 0))
       if(!location) navigate("/")
-    },[])
+    },[cart])
 
 
-    const CartLength = cart.reduce((acc, curr) => (acc = acc + curr.qty), 0)
+    const CartLength = cart?.reduce((acc, curr) => (acc = acc + curr.qty), 0)
 
     
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
-        <div className="logo-container h-[100px] ml-16">
+        <div className="logo-container h-[100px] w-[185px] ml-16 flex justify-between ">
           <img className="w-[100] bg-transparent" src={headerLogoUrl}  alt="logo" />
+          <p className=" text-base font-bold hover:text-orange-500 mt-[33px] cursor-pointer" onClick={() => setShowLocation(!showLocation)}>{"Other"}</p>
+          {showLocation && 
+            <LocationSlidebar close={setShowLocation} show={showLocation} />
+          }
          </div>
          <div className="nav-items ml-[200px] flex">
           <ul className="flex  items-center mr-[100px]">
@@ -56,19 +80,19 @@ const Header = () => {
           <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${CartLength})`}</Link> 
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">
               
-            {cart.length > 0 
+            {cart?.length > 0 
              
              ?
               
              (<div className=" mt-3 " >
-              {cart.map((res, index) => (<div className="flex justify-between " key={index}> 
+              {cart?.map((res, index) => (<div className="flex justify-between " key={index}> 
                        {/*<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={restaurantLogoUrl + res.imageId} alt=""></img></div>*/}
                        <div className="ml-[20px]">
-                            <span>{res.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
-                            <span className=" text-xs  font-semibold text-black ml-3">{res.name.substring(0, 20) + "... " + "x " + res.qty}</span>
+                            <span>{res.data.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
+                            <span className=" text-xs  font-semibold text-black ml-3">{res.data.name.substring(0, 20) + "... " + "x " + res.qty}</span>
                         </div>
                         <div>
-                            <span className=" text-xs  mr-[20px] font-medium text-[#93959f]">{res.price ? parseFloat( (res.price / 100 * res.qty).toFixed(0)): parseFloat( (res.defaultPrice / 100 * res.qty).toFixed(0))}</span>
+                            <span className=" text-xs  mr-[20px] font-medium text-[#93959f]">{res.data.price ? parseFloat( (res.data.price / 100 * res.qty).toFixed(0)): parseFloat( (res.data.defaultPrice / 100 * res.qty).toFixed(0))}</span>
                             </div>
                        
                     </div>))}
