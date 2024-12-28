@@ -14,13 +14,13 @@ const LandingPage = () => {
     const [result, setResult] = useState("")
     const dispatch = useDispatch()
 
-    const userLoc = JSON.parse(localStorage.getItem("foodCourt"))
+    const userLoc = JSON.parse(localStorage.getItem("userLocation"))
     dispatch(addUserLocation(userLoc))
 
     function locationSuccess (position) {
        // console.log(position?.coords?.longitude)
         const location = {"long": position?.coords?.longitude, "lat": position?.coords?.latitude}
-        localStorage.setItem("foodCourt", JSON.stringify(location))
+        localStorage.setItem("userLocation", JSON.stringify(location))
         dispatch(addUserLocation(location))
         setRefresh(!refresh)
       }
@@ -37,10 +37,17 @@ const LandingPage = () => {
         localStorage.setItem(foodCourt, "[]")
 
     }*/
-    const location = localStorage.getItem("foodCourt")
+    //const location = localStorage.getItem("userLocation")
     useEffect(() => {
 
     }, [refresh])
+
+    if(!localStorage?.getItem("userCart")) {
+        localStorage?.setItem("userCart", "[]")
+       
+      }
+      
+ 
 
     
 
@@ -49,7 +56,7 @@ const LandingPage = () => {
             const data = await fetch("https://api.api-ninjas.com/v1/geocoding?city="+ city +"&country=India", options)
             const json = await data.json()
             const location = {"long": json[0]?.longitude, "lat": json[0]?.latitude}
-            localStorage.setItem("foodCourt", JSON.stringify(location))
+            localStorage.setItem("userLocation", JSON.stringify(location))
             setRefresh(!refresh)
             console.log(json)
         }
@@ -96,7 +103,7 @@ const LandingPage = () => {
     
 
     
-    return( location ? <Body /> : 
+    return( userLoc?.long ? <Body /> : 
         <div className=" bg-orange-600 h-[100%]">
             <div className=" flex justify-between text-center">
                     
