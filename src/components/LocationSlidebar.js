@@ -33,15 +33,16 @@ const LocationSlidebar = ({close, show}) => {
             const data = await fetch("https://api.api-ninjas.com/v1/geocoding?city="+ city +"&country=India", options)
             const json = await data.json()
             const location = {"long": json[0]?.longitude, "lat": json[0]?.latitude}
+            console.log(location)
             localStorage.setItem("userLocation", JSON.stringify(location))
             //setRefresh(!refresh)
             dispatch(addUserLocation(location))
-            console.log(json)
+            //console.log(json)
             navigate("/")
             close(!show)
             //window.location.reload(false)
         }
-        catch (err){
+        catch (err){ 
             console.log(err)
         }
     }
