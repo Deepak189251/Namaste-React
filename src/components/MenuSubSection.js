@@ -2,7 +2,7 @@ import MenuItems from "./MenuItem"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-const MenuSubSection = ({response, filter}) => {
+const MenuSubSection = ({response, filter, id}) => {
   console.log(response)
   const [show, setShow] = useState(false)
   const changeShow = () => {
@@ -26,9 +26,9 @@ const MenuSubSection = ({response, filter}) => {
         </div>
         <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
           {show && <div className="answer w-[650px] m-auto">  {filter ? (productList.map((res, index)=>{
-        return <MenuItems key= {index} response = {res.card.info}/>
+        return <MenuItems key= {index} response = {res.card.info} id={id}/>
       })) : (  itemCards.map((res, index)=>{
-        return <MenuItems key= {index} response = {res.card.info}/>
+        return <MenuItems key= {index} response = {res.card.info} id={id}/>
       }))}
         </div>}
       </section> 
