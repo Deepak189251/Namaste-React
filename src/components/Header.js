@@ -51,12 +51,12 @@ const Header = () => {
 
     //setPrice(cart.reduce((acc, curr) => acc + curr.price * curr.qty , 0))
     useEffect(() => {
-      setPrice(cart.reduce((acc, curr) => curr.data.price ? acc = acc + curr.data.price /100 * curr.qty : acc = acc + curr.data.defaultPrice / 100 * curr.qty , 0))
+      setPrice(cart?.reduce((acc, curr) => curr.data.price ? acc = acc + curr.data.price /100 * curr.qty : acc = acc + curr.data.defaultPrice / 100 * curr.qty , 0))
       if(!location) navigate("/")
     },[cart])
 
 
-    const CartLength = cart?.reduce((acc, curr) => (acc = acc + curr.qty), 0)
+    const CartLength = cart?.reduce((acc, curr) => (acc = acc + curr?.qty), 0)
 
     
     return(
@@ -77,7 +77,7 @@ const Header = () => {
 
  {/*<span onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[120px] ml-2 pt-4 my-auto"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> */}
              
-          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${CartLength})`}</Link> 
+          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {cart.length > 0 && `(${CartLength})`}</Link> 
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">
               
             {cart?.length > 0 
