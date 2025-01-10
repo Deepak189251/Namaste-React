@@ -6,13 +6,19 @@ import { faCircle, faMinus, faPlus, faSquareCaretUp, faTrash } from "@fortawesom
 import { CartState } from "../utils/Context";
 import { useDispatch, useSelector } from "react-redux";
 import { addInCart, increaseQty, decreaseQty } from "../utils/userSlice";
-import Cart from "./Cart";
+//import Cart from "./Cart";
 import { useEffect, useState } from "react";
+import DiffRestaurant from "./DiffRestaurant";
 
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, isVeg, id} = props.response
    const dispatchnow = useDispatch()
    const [refresh, setRefresh] = useState()
+   const [show, setShow] = useState(false)
+   const resid = props.id
+   const resName = props.resname
+   //const eligible = useSelector(store => store.user.cartItem)
+   //const [eligible, setEligible] = useState()
    //const [quantity, setQuantity] = useState()
    //const cart = JSON.parse(localStorage.getItem("userCart"))
 
@@ -21,6 +27,13 @@ const MenuItems = (props) => {
    //let quantity = 1
    //const {state : {cart}, dispatch} = CartState();
  // const cart = useSelector(store => store.user.userCart)
+
+   /*if(cart[0]?.restaurant === resid) {
+      setEligible(true)
+   }
+   else{
+      setEligible(false)
+   }*/
 
    const index = cart?.filter((item) => item.id === id)
    
@@ -46,10 +59,15 @@ const MenuItems = (props) => {
       console.log(quantity)
    }
   })*/
-
+   const differentRestaurant = () => {
+      console.log("different restaurant used.")
+      setShow(true)
+   }
    const addToCart = () => {
-      dispatchnow(addInCart({id: id, data: props.response, qty: 1}))
+   
+      dispatchnow(addInCart({id: id, data: props.response, qty: 1, restaurant: resid, resName: resName}))
       setRefresh(!refresh)
+   
     //  setCart([...cart, props.response])
      // quantity = quantity + 1
      // console.log(cart)
@@ -96,7 +114,13 @@ const MenuItems = (props) => {
       localStorage.setItem("userCart", JSON.stringify(cart))
       dispatchnow(addInCart(cart))
       setRefresh(!refresh)*/
-
+      if(cart?.length > 0 && cart[0]?.restaurant !== resid){
+         console.log(resid)
+         differentRestaurant()
+      }
+      else{
+         addToCart()
+      }
       
    }
 
@@ -119,7 +143,7 @@ const MenuItems = (props) => {
       
    }
 
-   console.log(typeof cart)
+   //console.log(typeof cart)
   
  useEffect(() => {
 
@@ -173,7 +197,8 @@ const MenuItems = (props) => {
       <p className="product-desc pr-2 text-xs font-normal">{description}</p>
     </div>
   <div>
-   
+      
+      {show && <DiffRestaurant close={setShow} show={show} data={[{id: id, data: props.response, qty: 1, restaurant: resid, resName: resName}]} />}
       <div className="product-imgdiv w-[110px] ml-6 relative">
         <img className="product-img w-[100%] h-24 rounded-md" src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
         <div className="   ">
@@ -202,7 +227,7 @@ const MenuItems = (props) => {
 
          :
 
-       ( <div className="  bg-white rounded-md  text-center shadow-md absolute bottom-[-6px] right-[9px]  w-[88px] text-green-600 font-medium text-xs cursor-pointer " onClick={addToCart}>
+       ( <div className="  bg-white rounded-md  text-center shadow-md absolute bottom-[-6px] right-[9px]  w-[88px] text-green-600 font-medium text-xs cursor-pointer " onClick={handleCart}>
             <div className="hover:bg-gray-300 rounded-md">
                <p className=" py-[7px]">ADD</p>
             </div>
