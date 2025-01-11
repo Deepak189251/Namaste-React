@@ -14,6 +14,7 @@ import CartContext from "./utils/Context";
 import LandingPage from "./components/LandingPage";
 import { Provider } from "react-redux";
 import store from "./utils/Store";
+import Search from "./components/Search";
 const Applayout = () => {
   // const [cart, setCart] = useState([])
   
@@ -57,6 +58,10 @@ const AppRouter = createBrowserRouter([
             path: "/restaurants/:resId",
             element: <RestaurantMenu/>
          },
+         {
+            path: "/search",
+            element: <Search />
+         }
          
       ]              
    }
