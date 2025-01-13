@@ -17,6 +17,7 @@ const MenuItems = (props) => {
    const [show, setShow] = useState(false)
    const resid = props.id
    const resName = props.resname
+
    //const eligible = useSelector(store => store.user.cartItem)
    //const [eligible, setEligible] = useState()
    //const [quantity, setQuantity] = useState()
@@ -200,7 +201,11 @@ const MenuItems = (props) => {
       
       {show && <DiffRestaurant close={setShow} show={show} data={[{id: id, data: props.response, qty: 1, restaurant: resid, resName: resName}]} />}
       <div className="product-imgdiv w-[110px] ml-6 relative">
-        <img className="product-img w-[100%] h-24 rounded-md" src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
+        <img className={`product-img w-[100%] h-24 rounded-md ${props?.status?.opened ? 'filter-none' : 'filter grayscale'}`} src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
+        
+        {props?.status?.opened
+         
+         &&
         <div className="   ">
          {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
        {/*{cart?.some(p => p.id === id) ? 
@@ -212,6 +217,8 @@ const MenuItems = (props) => {
            <span onClick={increaseQuantity}>+</span>
            { }
          </div>) */}
+         
+         
          {cart?.some(p => p?.id === id) ? 
         (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] right-[9px] w-[88px] text-green-600 font-medium  flex justify-between text-sm " onClick={handleQuantity}>
             <div className="  cursor-pointer hover:bg-gray-300 rounded-s-md" onClick={decreaseQuantity}>
@@ -233,9 +240,10 @@ const MenuItems = (props) => {
             </div>
        </div>)
       
-      }
-       
+       }
+      
         </div>
+      }
        
         {/*console.log(cart)*/}
       </div>
