@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 //import { TotalPriceData }  from "../utils/PriceContext";
 import { CartState } from "../utils/Context";
+import { useSelector } from "react-redux";
 
 const Cart = () =>{
     
@@ -14,8 +15,8 @@ const Cart = () =>{
    // const {cart, setCart} = useContext(CartData)
    //    const {totalPrice} = useContext(TotalPriceData)
     //const [finalItem, setFinalItem] = useState([])
-
-    const{state: {cart}, dispatch} = CartState();
+    const cart = useSelector(store => store.user.userCart)
+    //const{state: {cart}, dispatch} = CartState();
    
  /*   console.log(cart)
 
@@ -40,28 +41,9 @@ const Cart = () =>{
             finalItem.push(res)
         }
     }) */
-
- /*  let len = cart.length
-   let leng = finalItem.length*/
-
-  /*   for(let i = 0 ; i < cart.length ; i++){
-       for(let j = 0 ; j <= finalItem.length ; j++){
-            if(finalItem.length === 0) {
-        debugger;      setFinalItem(cart[i])
-               console.log(cart[0])
-                 console.log(finalItem)
-            }
-           else if(Number(cart[i].id) !== Number(finalItem[j].id))
-                setFinalItem([...finalItem, cart[i]])
-        }
-    } */
-
-   // finalItem = [... new Set(cart)] 
-
-   // console.log(finalItem)
   useEffect(() => {
-    setPrice(cart.reduce((acc, curr) => curr.price ? acc = acc + curr.price /100 * curr.qty : acc = acc + curr.defaultPrice / 100 * curr.qty , 0))
-  })
+    setPrice(cart.reduce((acc, curr) => curr.data.price ? acc = acc + curr.data.price /100 * curr.qty : acc = acc + curr.data.defaultPrice / 100 * curr.qty , 0))
+  },[cart])
     
 
 
@@ -79,7 +61,7 @@ const Cart = () =>{
     
     return (
         <div >
-        <h3 className=" text-center mb-10 text-xl font-extrabold mt-4">Your Cart</h3>
+        <h3 className="text-center mb-10 text-xl font-extrabold mt-4">{cart[0]?.resName}</h3>
         <div className="heading flex  w-[600px] mb-4 m-auto text-sm font-bold">
             <div className="  mr-[310px]">Added Items</div>
             <div className=" mr-[35px]">Quantity</div>
