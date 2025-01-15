@@ -71,7 +71,7 @@ const Header = () => {
          <div className="nav-items ml-[200px] flex">
           <ul className="flex  items-center mr-[100px]">
              <li className="px-4 hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/"}>Home</Link></li>
-             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/about"}>About</Link></li>
+             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/search"}>About</Link></li>
              <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/contactus"}>Contact Us</Link></li>
 
 
