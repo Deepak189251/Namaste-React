@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faClock, faIndianRupee } from "@fortawesome/free-solid-svg-icons";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import FilterSwitch from "./FilterSwitch";
+import { useDispatch } from "react-redux";
+import { updateCart } from "../utils/userSlice";
 const RestaurantMenu = () => {
    
 
@@ -13,10 +15,11 @@ const RestaurantMenu = () => {
   /*  const [resInfo, setResInfo] = useState(null)
     const [menu, setMenu] = useState([]) */
     
-    
+    const dispatch = useDispatch()
     const {resId} = useParams();
    // console.log(resId)
-
+   //const [showDiffRes, setShowDiffRes] = useState(false)
+  // const [diffRestaurant, setDiffRestaurant] = useState()
    const [show, setShow] = useState(false);
    const [showIndex, setShowIndex] = useState(null)
 
@@ -24,7 +27,15 @@ const RestaurantMenu = () => {
     setShowIndex(index)
     setShow(!shown)
   }
+/*
+   const handleDiffRestaurant = (value) => {
+      setShowDiffRes(true)
+      setDiffRestaurant(value)
+   }
 
+   const replaceResItem = (value) => {
+    dispatch(updateCart(value))
+   }*/
  /*   useEffect(() => {
        fetchInfo(); 
     }, []);
@@ -66,7 +77,7 @@ const RestaurantMenu = () => {
 
 
 
-    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage} = resInfo.data?.cards[2]?.card?.card?.info
+    const {name, cuisines, areaName, avgRatingString, totalRatingsString, costForTwoMessage, availability} = resInfo.data?.cards[2]?.card?.card?.info
 
     const {lastMileTravelString, slaString} = resInfo.data?.cards[2]?.card?.card?.info?.sla
 
@@ -104,7 +115,7 @@ const RestaurantMenu = () => {
           </div>
           <hr></hr>
           <div className="additional-info mt-4 mb-4">
-            <span className="delivery-time text-sm">{<FontAwesomeIcon icon={faClock}/>}{"  " + slaString}</span>
+            <span className="delivery-time text-sm">{<FontAwesomeIcon icon={faClock}/>}{ slaString ? " " + slaString : ' ' }</span>
             <span className="offer ml-5">{<FontAwesomeIcon icon={faIndianRupee}/>}{"  " + costForTwoMessage}</span>
           </div>
           <div className=" mb-4 mt-3">
@@ -124,10 +135,13 @@ const RestaurantMenu = () => {
                 response = {res?.card?.card} 
                 show = {index === showIndex ? show : false}
                 filter = {vegFilter}
-                showItems= {changeShow}/>
+                showItems= {changeShow}
+                id = {resInfo?.data?.cards[2]?.card?.card?.info?.id}
+                name = {name}
+                status = {availability}/>
             })}
         </div> 
-    )
+    )  
 }
 /*
 {menu.map((res, index)=>{
