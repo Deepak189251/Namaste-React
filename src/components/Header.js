@@ -2,7 +2,7 @@ import { headerLogoUrl } from "../utils/constant"
 import { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
-import { faShoppingCart, faCircle, faSquareCaretUp  } from "@fortawesome/free-solid-svg-icons"
+import { faShoppingCart, faCircle, faSquareCaretUp, faMagnifyingGlass  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { restaurantLogoUrl } from "../utils/constant"
 import { useNavigate } from "react-router-dom"
@@ -71,7 +71,13 @@ const Header = () => {
          <div className="nav-items ml-[200px] flex">
           <ul className="flex  items-center mr-[100px]">
              <li className="px-4 hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/"}>Home</Link></li>
-             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/search"}>About</Link></li>
+             <li className="px-4  hover:text-orange-500 text-lg font-bold">
+                <Link className="nav-link" to={"/search"}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className=" mr-[8px]" />
+                    <span >{"Search"}</span>
+                </Link>
+              </li>
+             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/about"}>About</Link></li>
              <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/contactus"}>Contact Us</Link></li>
 
 
@@ -88,7 +94,7 @@ const Header = () => {
               {cart?.map((res, index) => (<div className="flex justify-between " key={index}> 
                        {/*<div className=" bg-slate-300 w-100px"><img className=" w-[100%]" src={restaurantLogoUrl + res.imageId} alt=""></img></div>*/}
                        <div className="ml-[20px]">
-                            <span>{res.data.itemAttribute.vegClassifier === "VEG" ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
+                            <span>{res.data.isVeg ? (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "green"}} />) : (<FontAwesomeIcon icon={faSquareCaretUp} style={{color: "red"}} />)}</span>
                             <span className=" text-xs  font-semibold text-black ml-3">{res.data.name.substring(0, 20) + "... " + "x " + res.qty}</span>
                         </div>
                         <div>
