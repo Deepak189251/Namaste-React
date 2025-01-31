@@ -16,6 +16,7 @@ const MenuSection = (props)=> {
     const filterbtn = props.filter
     const id = props.id
     const resName = props.name
+    
    // let productList
    // let vegItems
    // console.log(filterbtn)
@@ -35,7 +36,7 @@ const MenuSection = (props)=> {
         </div>
         <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
         {show && <div className="answer w-[680px] m-auto"> {categories.map((res, index) => {
-           return <MenuSubSection key= {index} response= {res} filter={filterbtn} id={id} resname={resName}/>
+           return <MenuSubSection key= {index} status = {props.status} response= {res} filter={filterbtn} id={id} resname={resName}/>
         })}
         
           
@@ -89,9 +90,9 @@ const MenuSection = (props)=> {
      </div>
      <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
        {show && <div className="answer w-[680px] m-auto">  {filterbtn ? (productList.map((res, index)=>{
-     return <MenuItems key= {index} response = {res.card.info} id = {id} resname={resName}/>
+     return <MenuItems key= {index} status = {props.status} response = {res.card.info} id = {id} resname={resName}/>
    })) : (  itemCards.map((res, index)=>{
-     return <MenuItems key= {index} response = {res.card.info} id = {id} resname={resName}/>
+     return <MenuItems key= {index} status = {props.status} response = {res.card.info} id = {id} resname={resName}/>
    }))}
      </div>}
    </section> 
