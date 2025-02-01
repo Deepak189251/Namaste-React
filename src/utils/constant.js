@@ -39,4 +39,11 @@ https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&la
 
 //export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
 
-export const api = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.319436&lng=85.829222&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+export const search = "https://www.swiggy.com/dapi/restaurants/search/v3?lat=20.462521&lng=85.8829895&str=DFC&trackingId=null&submitAction=ENTER&queryUniqueId=d7a0c9b2-11f7-7318-5981-c71d9ee3e0c3"
+
+export const options = {
+  method: "get",
+  headers: {
+    'X-Api-Key': process.env.REACT_APP_GEOCODING_KEY
+  }
+}
