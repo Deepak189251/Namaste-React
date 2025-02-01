@@ -5,7 +5,8 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         userLocation: null,
-        userCart: []
+        userCart: [],
+        cartItem: false
     },
 
     reducers: {
@@ -18,8 +19,11 @@ const userSlice = createSlice({
            }
            else{
                 const res = state?.userCart?.find((item) => item?.id === action?.payload?.id)
-                if(!res){
+                if(!res && state?.userCart[0]?.restaurant === action?.payload?.restaurant) {
                     state.userCart?.push(action.payload)
+                }
+                else{
+                    state.cartItem = true
                 }
                 
            }
@@ -49,10 +53,14 @@ const userSlice = createSlice({
             state.userCart = state.userCart.filter((item) => item.id !== action.payload)
             localStorage.setItem("userCart", JSON.stringify(state?.userCart))
 
+        },
+        replaceCart: (state, action) => {
+            state.userCart = action.payload
+            localStorage.setItem("userCart", JSON.stringify(state?.userCart))
         }
     }
 })
 
-export const {addUserLocation, addInCart, updateCart, increaseQty, decreaseQty, removeFromCart} = userSlice.actions
+export const {addUserLocation, addInCart, updateCart, increaseQty, decreaseQty, removeFromCart, replaceCart} = userSlice.actions
 
 export default userSlice.reducer
