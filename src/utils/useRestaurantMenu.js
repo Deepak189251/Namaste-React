@@ -5,7 +5,7 @@ const useRestaurantMenu = (resId) => {
 const [resInfo, setResInfo] = useState(null)
 //const [menu, setMenu] = useState([])
 //const [filteredSection, setFilteredSection] = useState([])
-const location = JSON.parse(localStorage.getItem("foodCourt"))
+const location = JSON.parse(localStorage.getItem("userLocation"))
 
 useEffect(() => {
    fetchInfo();
