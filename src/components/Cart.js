@@ -54,26 +54,26 @@ const Cart = () =>{
             <div className=" text-center mt-32">
                 <h5 className=" text-lg font-bold pb-2">Your cart is empty!</h5>
                 <p className=" mb-[30px]">You can go to home page to view more restaurants.</p>
-                <Link to={"/"}><div className=" p-[6px] m-auto w-[240px] bg-orange-500 text-sm font-bold text-white">SEE RESTAURANTS NEAR YOU</div></Link>
+                <Link to={"/"}><div className=" p-[6px] m-auto sm:w-[240px] w-[220px] bg-orange-500 text-sm font-bold text-white">SEE RESTAURANTS NEAR YOU</div></Link>
             </div>
         )
     }
     
     return (
         <div >
-        <h3 className="text-center mb-10 text-xl font-extrabold mt-4">{cart[0]?.resName}</h3>
-        <div className="heading flex  w-[600px] mb-4 m-auto text-sm font-bold">
-            <div className="  mr-[310px]">Added Items</div>
-            <div className=" mr-[35px]">Quantity</div>
-            <div>Price</div>
+        <h3 className="text-center sm:mb-10 mb-[20px] sm:text-xl text-lg md:font-extrabold font-bold mt-4">{cart[0]?.resName}</h3>
+        <div className="heading flex sm:justify-start justify-center  md:w-[600px] sm:w-[490px] w-[290px] mb-4 m-auto text-sm font-bold">
+            <div className="  md:mr-[370px] sm:mr-[265px] mr-0">Added Items</div>
+            <div className=" hidden sm:block md:mr-[35px] mr-[30px]">Quantity</div>
+            <div className="hidden sm:block">Price</div>
         </div>
         <div>
             {cart.map((res, index) => {
                return <CartItems key={index} res={res}/>
             })}
         </div>
-     <div className=" flex justify-center">
-        <div className="priceContainer w-[260px] mt-[10px]">
+     <div className=" flex sm:flex-row flex-col justify-center ">
+        <div className="priceContainer md:w-[260px] w-[230px] mt-[10px] sm:ml-[2px] sm:mr-[0] ml-auto mr-auto ">
             <div className=" border-b-2 pb-2 pt-2">
                 <span className=" mr-[133px] font-semibold text-sm">Subtotal :</span>
                 <span className="text-sm font-semibold ">{parseFloat(Price.toFixed(2))}</span>
@@ -89,8 +89,8 @@ const Cart = () =>{
 
         </div>
 
-        <div className=" ml-6 w-[155px] mt-[88px]">
-          <div className=" p-[6px] m-auto w-[100%] text-center  bg-orange-500 text-sm font-bold text-white cursor-pointer" onClick={()=> alert("your order is placed!")}>Proceed to Checkout</div>
+        <div className=" sm:ml-6 w-[155px] sm:mt-[60px] sm:mr-[2px] ml-auto mr-auto   mt-[20px]">
+          <div className=" p-[6px] sm:m-0 m-auto w-[100%] text-center  bg-orange-500 text-sm font-bold text-white cursor-pointer" onClick={()=> alert("your order is placed!")}>Proceed to Checkout</div>
         </div>
         </div>
         </div>
