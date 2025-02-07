@@ -64,19 +64,41 @@ const CartItems = ({res}) => {
     }
      
     return(
-      <div className="container">
-        <div className=" flex justify-center mb-3  mt-3">
+      <div className=" mx-auto md:w-[700px] sm:w-[490px] w-[300px] h-auto">
+        <div className=" flex justify-center mb-3 mt-3 relative md:h-[100px] sm:h-[78px] h-[75px]">
             
-            <div className="image w-[100px] h-[100px] mr-8">
+            <div className="image md:w-[100px] sm:w-[76px] w-[75px] md:h-[100px] sm:h-[76px] h-[75px] md:mr-8 sm:mr-[15px] mr-[8px]">
                 <img className=" w-[100%] h-[100%] rounded-md" src={restaurantLogoUrl + data?.imageId} rel=""/>
             </div>
-            <div className="details w-[300px] pl-0 mr-8 font-semibold text-sm pt-4">
+            <div className="details md:w-[300px] sm:w-[230px] w-[200px] pl-0 md:mr-[28px] sm:mr-[25px] mr-[10px] text-xs font-semibold sm:text-sm sm:pt-5 pt-[2px]">
                 <p>{data?.name}</p>
             </div>
-            <div className="quantity pr-2 w-[60px] mr-11 text-xs flex  border border-gray-200 h-[30px] mt-4 pl-2 pt-[3px] cursor-pointer">
-              <span onClick={decreaseQuantity} className="mt-[3px]"><FontAwesomeIcon icon={faMinus} size="xs" style={{color: "green"}}></FontAwesomeIcon></span> <div className=" pl-2 pr-2 text-sm font-semibold text-green-600">{qty}</div><span onClick={increaseQuantity} className="mt-[3px]"><FontAwesomeIcon icon={faPlus} size="xs" style={{color: "green"}}></FontAwesomeIcon></span>
+            {/*<div className="quantity pr-2 w-[60px] mr-11 text-xs flex  border border-gray-200 h-[30px] mt-4 pl-2 pt-[3px] cursor-pointer">
+              <span onClick={decreaseQuantity} className="mt-[3px]">
+                <FontAwesomeIcon icon={faMinus} size="xs" style={{color: "green"}}></FontAwesomeIcon>
+              </span> 
+              <div className=" pl-2 pr-2 text-sm font-semibold text-green-600">{qty}</div>
+              <span onClick={increaseQuantity} className="mt-[3px]">
+                <FontAwesomeIcon icon={faPlus} size="xs" style={{color: "green"}}></FontAwesomeIcon>
+              </span>
+            </div>*/}
+            <p className=" sm:hidden absolute text-xs font-semibold top-[50px] left-[81px]">{"Qty:"}</p>
+            <div className=" bg-white rounded-md text-center shadow-md md:w-[88px] sm:w-[75px] w-[60px] sm:static absolute top-[27px] left-[112px] sm:h-[30px] h-[25px] mt-[18px] mr-[20px] text-green-600 font-medium  flex justify-between text-sm ">
+                <div className="  cursor-pointer hover:bg-gray-300 rounded-s-md" onClick={decreaseQuantity}>
+                          <FontAwesomeIcon className="md:mx-[10px] sm:mx-[8px] sm:my-[7px] mx-[5px] my-[5px]" icon={faMinus} />
+                </div>
+                <div className=" sm:mx-[5px] mx-[3px] sm:my-[4px] my-[2px] font-semibold">
+                          {qty}
+                </div>
+                <div className=" cursor-pointer hover:bg-gray-300 rounded-e-md" onClick={increaseQuantity}>
+                          <FontAwesomeIcon className="md:mx-[10px] sm:mx-[8px] sm:my-[7px] mx-[5px] my-[5px]" icon={faPlus} />
+                </div>
             </div>
-            <div className="price mr-12 w-[50px] text-sm font-semibold pt-4" >
+
+            {/*<p className=" sm:hidden absolute text-xs font-semibold top-[32px] right-[100px]">{"Rs:"}</p>*/}
+
+            <div className="price md:mr-[25px] sm:mr-[20px] mr-[14px] w-auto text-sm font-semibold pt-4 sm:static flex absolute right-[48px] top-[23px]" >
+                <p className=" sm:hidden static text-xs font-semibold mt-[3px] mr-[5px]">{"Rs:"}</p>
                 <p>{data?.price ? data?.price / 100 * qty : data?.defaultPrice / 100 * qty}</p>
             </div>
             <div className="delete cursor-pointer pt-4">
