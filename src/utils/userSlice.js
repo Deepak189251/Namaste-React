@@ -6,7 +6,10 @@ const userSlice = createSlice({
     initialState: {
         userLocation: null,
         userCart: [],
-        cartItem: false
+        cartItem: false,
+        searchedRestaurant: null,
+        searchedDish: null,
+        searchedKeyword: null
     },
 
     reducers: {
@@ -57,10 +60,11 @@ const userSlice = createSlice({
         replaceCart: (state, action) => {
             state.userCart = action.payload
             localStorage.setItem("userCart", JSON.stringify(state?.userCart))
-        }
+        },
+      
     }
 })
 
-export const {addUserLocation, addInCart, updateCart, increaseQty, decreaseQty, removeFromCart, replaceCart} = userSlice.actions
+export const {addUserLocation, addInCart, updateCart, increaseQty, decreaseQty, removeFromCart, replaceCart,} = userSlice.actions
 
 export default userSlice.reducer
