@@ -15,6 +15,7 @@ import LandingPage from "./components/LandingPage";
 import { Provider } from "react-redux";
 import store from "./utils/Store";
 import Search from "./components/Search";
+import DishInfo from "./components/DishInfo";
 const Applayout = () => {
   // const [cart, setCart] = useState([])
   
@@ -57,6 +58,10 @@ const AppRouter = createBrowserRouter([
          {
             path: "/restaurants/:resId",
             element: <RestaurantMenu/>
+         },
+         {
+            path: "/dishes/:dishId",
+            element: <DishInfo />
          },
          {
             path: "/search",
