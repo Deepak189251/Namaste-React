@@ -77,28 +77,28 @@ const LocationSlidebar = ({close, show}) => {
   return (
     <>
       <div className="  z-[10] fixed top-0 bottom-0 left-0 right-0 bg-[rgba(189,189,189,0.9)]" onClick={() => close(!show)}></div>
-      <div className="bg-white fixed w-[500px] h-screen z-[20] left-0 pl-[150px] pt-[30px]">
+      <div className="bg-white fixed md:w-[500px] sm:w-[320px] w-[235px] h-screen z-[20] left-0 md:pl-[150px] sm:pl-[60px] pl-[35px] md:pt-[30px] sm:pt-[25px] pt-[20px]">
           <div>
               <FontAwesomeIcon icon={faX} onClick={() => close(!show)} className=' cursor-pointer' />
           </div>
-          <div className=' w-[290px] h-[50px] border-gray-500 border-1 mt-[30px]'>
-              <input value={search} onChange={(e) => setSearch(e.target.value)} className=' border-none outline-none mt-[10px] ml-[30px]' type='text' placeholder='Search for city' />
+          <div className=' md:w-[290px] sm:w-[211px] w-[171px] md:h-[50px] sm:h-[45px] h-[39px] border-gray-500 border-1 sm:mt-[30px] mt-[25px]'>
+              <input value={search} onChange={(e) => setSearch(e.target.value)} className=' border-none md:w-[200px] md:text-lg sm:text-base text-sm sm:w-[170px] w-[140px] sm:placeholder:text-base placeholder:text-sm outline-none md:mt-[10px] mt-[8px] md:ml-[30px] sm:ml-[22px] ml-[15px]' type='text' placeholder='Search for city' />
           </div>
-          <div className=' mt-[30px] border-gray-500 border-1 w-[290px] h-[80px] pt-[12px] pl-[10px] pb-[10px] hover:text-orange-500 cursor-pointer flex' onClick={getUserLocation}>
-              <div className='ml-[10px] mr-[13px]'>
-                  <FontAwesomeIcon className=' w-[20px] h-[18px]' icon={faLocationCrosshairs} />
+          <div className=' mt-[30px] border-gray-500 border-1 md:w-[290px] sm:w-[211px] w-[171px] md:h-[80px] sm:h-[70px] h-[57px] sm:pt-[12px] pt-[9px] sm:pl-[10px] pl-[6px] sm:pb-[10px] pb-[7px] hover:text-orange-500 cursor-pointer flex' onClick={getUserLocation}>
+              <div className='md:ml-[10px] sm:ml-[2px] ml-0 md:mr-[13px] sm:mr-[8px] mr-[5px]'>
+                  <FontAwesomeIcon className=' sm:w-[20px] sm:h-[18px] w-[16px] h-[14px]' icon={faLocationCrosshairs} />
               </div>
               <div>
-                  <p className=' mb-[3px] text-base font-semibold'>{"Get current location"}</p>
-                  <p className=' text-[13px] font-normal'>{"Using GPS"}</p>
+                  <p className=' mb-[3px] md:text-base sm:text-sm text-xs font-semibold'>{"Get current location"}</p>
+                  <p className=' sm:text-[13px] text-[11px] font-normal'>{"Using GPS"}</p>
               </div>
           </div>
-          <div className=' w-[290px] h-[350px] mt-[30px] border-gray-500 border-1 overflow-scroll'>
+          <div className=' md:w-[290px] sm:w-[210px] w-[171px] sm:h-[350px] h-[260px] sm:mt-[30px] mt-[25px] border-gray-500 border-1 overflow-scroll'>
               {filteredCities?.slice(0, 10).map((city) => 
                   <div onClick={() => selectCity(city)}>
-                      <div className=' p-[10px] flex'>
-                          <FontAwesomeIcon className=' ml-[20px] mt-[4px] mr-[15px]' icon={faLocationDot} />
-                          <p className='hover:text-orange-500 cursor-pointer font-semibold'>{city}</p>
+                      <div className=' sm:p-[10px] p-[7px] flex'>
+                          <FontAwesomeIcon className=' md:ml-[20px] ml-[10px] mt-[4px] md:mr-[15px] mr-[8px]' icon={faLocationDot} />
+                          <p className='hover:text-orange-500 sm:text-base text-sm cursor-pointer font-semibold'>{city}</p>
                       </div>
                       
                       <hr/>
