@@ -3,35 +3,55 @@ import {useState, useEffect, useRef} from 'react'
 import SearchCard from './SearchCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faL, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useSelector, useDispatch } from 'react-redux'
+import { addSearchedDish, addSearchedRestaurant, addSearchedKeyword, removeSearchedDish, removeSearchedRestaurant} from '../utils/searchSlice'
 const Search = () => {
     const [resData, setResData] = useState()
     const [refresh, setRefresh] = useState(false)
     const [resultType, setResultType]  = useState()
     const text = useRef(null)
     const location = JSON.parse(localStorage.getItem("userLocation"))
+    const dispatch = useDispatch()
     const searchData = async (type) => {
+        dispatch(removeSearchedDish())
         const data = await fetch(`https://www.swiggy.com/dapi/restaurants/search/v3?lat=${location?.lat}&lng=${location?.long}&str=${text.current.value}&trackingId=null&submitAction=ENTER&queryUniqueId=6d62ef22-3c39-2e69-e3f5-a0c948eece24&selectedPLTab=${type ? 'DISH' : 'RESTAURANT'}`)
         const json = await data.json()
         setResData(type ? json?.data?.cards[0]?.groupedCard?.cardGroupMap?.DISH : json?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT)
+        type ? dispatch(addSearchedDish(json?.data?.cards[0]?.groupedCard?.cardGroupMap?.DISH) ) : dispatch(addSearchedRestaurant(json?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT))
+        dispatch(addSearchedKeyword(text.current.value))
         setRefresh(!refresh)
         setResultType(type)
         console.log(json)
     }
-
+    const searchedDish = useSelector(store => store.search.searchedDish)
+    const searchedRestaurant = useSelector(store => store.search.searchedRestaurant)
+    const searchedKeyword = useSelector(store => store.search.searchedKeyword)
+    console.log(searchedDish, searchedRestaurant)
     const searchRestaurant = () => {
+    if(!searchedRestaurant || searchedKeyword !== text.current.value){
       if(resultType){
         searchData(false)
       }
     }
-
+    else{
+      setResultType(false)
+    }
+  }
+  
     const searchDish = () => {
+      if(!searchedDish || searchedKeyword !== text.current.value){
       if(!resultType){
         searchData(true)
       }
     }
-    const filteredData = resData?.cards ? resData?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Dish" || res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"  ) : false
+    else{
+      setResultType(true)
+    }
+  }
+    //const filteredData = resData?.cards ? resData?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Dish" || res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"  ) : false
+    const filteredData = resultType ? searchedDish?.cards ? searchedDish?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Dish") : false : searchedRestaurant?.cards ? searchedRestaurant?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant") : false
     useEffect(() => {
-      console.log(refresh, resData)
+      console.log(refresh)
     }, [refresh])
     
   return (
