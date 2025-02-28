@@ -2,7 +2,7 @@ import { headerLogoUrl } from "../utils/constant"
 import { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
-import { faShoppingCart, faCircle, faSquareCaretUp, faMagnifyingGlass  } from "@fortawesome/free-solid-svg-icons"
+import { faShoppingCart, faCircle, faSquareCaretUp, faMagnifyingGlass, faList  } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { restaurantLogoUrl } from "../utils/constant"
 import { useNavigate } from "react-router-dom"
@@ -15,6 +15,7 @@ const Header = () => {
    // const {cart} = useContext(CartData)
    // const {totalPrice, setTotalPrice} = useContext(TotalPriceData)
     const [showLocation, setShowLocation] = useState(false)
+    const [menu, setMenu] = useState(false)
     const [mouseHover, setMouseHover] = useState(false)
     const [Price, setPrice] = useState(0)
     const navigate = useNavigate()
@@ -61,29 +62,27 @@ const Header = () => {
     
     return(
       <header className="flex justify-between" style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}}>
-        <div className="logo-container h-[100px] w-[185px] ml-16 flex justify-between ">
-          <img className="w-[100] bg-transparent" src={headerLogoUrl}  alt="logo" />
-          <p className=" text-base font-bold hover:text-orange-500 mt-[33px] cursor-pointer" onClick={() => setShowLocation(!showLocation)}>{"Other"}</p>
+        <div className="logo-container h-[100px] lg:w-[210px] w-[190px] xl:ml-[100px] lg:ml-[45px] ml-[42px] flex justify-between ">
+          <img className="lg:w-[100px] w-[90px] bg-transparent" src={headerLogoUrl}  alt="logo" />
+          <p className=" lg:text-lg text-base font-bold md:block hidden  hover:text-orange-500 mt-[33px] cursor-pointer" onClick={() => setShowLocation(!showLocation)}>{"Location"}</p>
           {showLocation && 
             <LocationSlidebar close={setShowLocation} show={showLocation} />
           }
          </div>
-         <div className="nav-items ml-[200px] flex">
-          <ul className="flex  items-center mr-[100px]">
-             <li className="px-4 hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/"}>Home</Link></li>
-             <li className="px-4  hover:text-orange-500 text-lg font-bold">
+         <div className="nav-items xl:ml-[200px] lg:ml-[120px] ml-[60px] md:flex hidden">
+          <ul className="flex  items-center xl:mr-[100px] lg:mr-[60px] mr-[45px]">
+             <li className="lg:px-4 lg:mr-[10px]  px-[15px] hover:text-orange-500 lg:text-lg text-base font-bold "><Link className="nav-link" to={"/"}>Home</Link></li>
+             <li className="lg:px-4 lg:mr-[10px] px-[15px]  hover:text-orange-500 lg:text-lg text-base font-bold ">
                 <Link className="nav-link" to={"/search"}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className=" mr-[8px]" />
                     <span >{"Search"}</span>
                 </Link>
               </li>
-             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/about"}>About</Link></li>
-             <li className="px-4  hover:text-orange-500 text-lg font-bold"><Link className="nav-link" to={"/contactus"}>Contact Us</Link></li>
-
+             <li className="lg:px-4 lg:mr-[10px] px-[15px]  hover:text-orange-500 lg:text-lg text-base font-bold "><Link className="nav-link" to={"/about"}>About</Link></li>
 
  {/*<span onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[120px] ml-2 pt-4 my-auto"><Link to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {`(${cart.length})`}</Link> */}
              
-          <li className="nav-link px-4  hover:text-orange-500 text-lg font-bold h-[100px] pt-[37px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {cart.length > 0 && `(${CartLength})`}</Link> 
+          <li className="nav-link lg:px-4 px-[15px]  hover:text-orange-500 lg:text-lg text-base font-bold h-[100px] lg:pt-[37px] pt-[38px] " onMouseEnter={() => (setMouseHover(true))} onMouseLeave={() => (setMouseHover(false))} ><Link  to={"/cart"}>{<FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>} Cart {cart?.length > 0 && `(${CartLength})`}</Link> 
              {mouseHover && (<div className=" w-[300px] bg-white absolute top-[100px] right-[110px] border-t-2 border-orange-400 shadow-md">
               
             {cart?.length > 0 
@@ -126,6 +125,37 @@ const Header = () => {
               </li> 
               </ul>
          </div>
+         <div className=" md:hidden " onClick={() => setMenu(!menu)}>
+            <FontAwesomeIcon icon={faList} className=" mr-[40px] mt-[36px]"  />
+            {menu &&
+            <div>
+              <div className="  z-[10] fixed top-0 bottom-0 left-0 right-0 " onClick={() => setMenu(!menu)}></div>
+
+              <div style={{boxShadow: "0 0px 50px -4px rgb(0 0 0 / 0.1)"}} className=" absolute text-black right-[20px] z-[20] top-[102px] bg-white items-center flex flex-col justify-between py-[10px] h-[150px] w-[120px]">
+                
+            <div>
+              <Link to={"/cart"} >
+                <p className="cursor-pointer hover:underline hover:text-orange-500">{"Cart"}</p>
+              </Link>
+            </div>
+            <div>
+              <Link to={"/about"}>
+                <p className="cursor-pointer hover:underline hover:text-orange-500">{"About"}</p>
+              </Link>
+            </div>
+            <div>
+              <Link to={"/search"}>
+                <p className="cursor-pointer hover:underline hover:text-orange-500">{"Search"} </p>
+              </Link>
+            </div>
+            <div>
+                <p className="cursor-pointer hover:underline hover:text-orange-500" onClick={() => setShowLocation(!showLocation)} >{"Location"} </p>
+            </div>
+          </div> 
+          </div>
+            }
+         </div>
+         
       </header>
     )
  }
