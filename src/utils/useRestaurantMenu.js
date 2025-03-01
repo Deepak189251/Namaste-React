@@ -15,7 +15,7 @@ useEffect(() => {
 const fetchInfo = async () => {
     // It is swiggy's original Api used in this app
     //const data = await fetch(menuApi + resId);
-    const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${location?.lat}&lng=${location.long}&restaurantId=`+ resId);
+    const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${location?.lat}&lng=${location?.long}&restaurantId=`+ resId);
 
     const resdata = await data.json()
   console.log(resdata)
