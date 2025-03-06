@@ -17,7 +17,12 @@ const MenuItems = (props) => {
    const [show, setShow] = useState(false)
    const resid = props.id
    const resName = props.resname
-
+   console.log(description)
+   let cleanedDescription
+   description ? description?.search(/\xa0/) !== -1 ? cleanedDescription = description.replace(/\xa0/g, ' ') : cleanedDescription = description : cleanedDescription = " "
+   
+   //console.log(cleanedDescription)
+   
    //const eligible = useSelector(store => store.user.cartItem)
    //const [eligible, setEligible] = useState()
    //const [quantity, setQuantity] = useState()
@@ -61,7 +66,7 @@ const MenuItems = (props) => {
    }
   })*/
    const differentRestaurant = () => {
-      console.log("different restaurant used.")
+      //console.log("different restaurant used.")
       setShow(true)
    }
    const addToCart = () => {
@@ -190,37 +195,27 @@ const MenuItems = (props) => {
     </div> */
 
  <>
-  <div className="product-info flex justify-between mb-5 mt-3">
-    <div className="product-header text-left w-[700px]">
+  <div className="product-info flex justify-between h-auto mb-3 mt-3  ">
+    <div className="product-header text-left ">
       <p>{productIcon}</p>
-      <h6 className="product-name mb-0 font-semibold">{name}</h6>
+      <h6 className="product-name md:text-base text-sm mb-[3px] md:font-bold font-semibold">{name}</h6>
       <p className="product-price pb-[10px] text-sm font-normal"> &#8377;{price?  price/100 :  defaultPrice/100}</p>
-      <p className="product-desc pr-2 text-xs font-normal">{description}</p>
+      <h6 className="product-desc pr-2 text-xs font-medium">{cleanedDescription}</h6>
     </div>
-  <div>
+  <div className=" h-[100%]  ">
       
       {show && <DiffRestaurant close={setShow} show={show} data={[{id: id, data: props.response, qty: 1, restaurant: resid, resName: resName}]} />}
-      <div className="product-imgdiv w-[110px] ml-6 relative">
-        <img className={`product-img w-[100%] h-24 rounded-md ${props?.status?.opened ? 'filter-none' : 'filter grayscale'}`} src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
+      <div className="product-imgdiv md:w-[125px] w-[108px] md:h-[110px] h-[96px] mt-[12px] ml-[35px] relative">
+        <img className={`product-img w-[100%] h-[100%] rounded-md ${props?.status?.opened ? 'filter-none' : 'filter grayscale'}`} src={imageId ? restaurantLogoUrl + imageId : foodImgPlaceholder}/>
         
         {props?.status?.opened
          
          &&
-        <div className="   ">
-         {/*click === false ?  <button className=" w-[100%] text-green-600 font-medium text-xs" onClick={addToCart}>ADD</button> : <button className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>*/}
-       {/*{cart?.some(p => p.id === id) ? 
-        (<div className=" w-[100%] text-red-600 font-medium text-lg " onClick={removeFromCart}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></div>) */}
-       {/* (<div className=" w-[100%] text-red-600 font-medium text-lg ">
-          
-           <span onClick={decreaseQuantity}>-</span>
-           <span>{ }</span>
-           <span onClick={increaseQuantity}>+</span>
-           { }
-         </div>) */}
+        <div >
          
          
          {cart?.some(p => p?.id === id) ? 
-        (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] right-[9px] w-[88px] text-green-600 font-medium  flex justify-between text-sm " onClick={handleQuantity}>
+        (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] md:right-[16px] right-[10px] w-[88px] text-green-600 font-medium  flex justify-between text-sm " onClick={handleQuantity}>
             <div className="  cursor-pointer hover:bg-gray-300 rounded-s-md" onClick={decreaseQuantity}>
                <FontAwesomeIcon className="mx-[10px] my-[7px]" icon={faMinus} />
             </div>
@@ -234,7 +229,7 @@ const MenuItems = (props) => {
 
          :
 
-       ( <div className="  bg-white rounded-md  text-center shadow-md absolute bottom-[-6px] right-[9px]  w-[88px] text-green-600 font-medium text-xs cursor-pointer " onClick={handleCart}>
+       ( <div className="  bg-white rounded-md  text-center shadow-md absolute bottom-[-6px] md:right-[16px] right-[10px]  w-[88px] text-green-600 font-medium text-xs cursor-pointer " onClick={handleCart}>
             <div className="hover:bg-gray-300 rounded-md">
                <p className=" py-[7px]">ADD</p>
             </div>
@@ -252,7 +247,7 @@ const MenuItems = (props) => {
       </div>
     </div>
    </div>
-   <hr></hr>
+   <hr className=" "></hr>
    </>
    )
 }
