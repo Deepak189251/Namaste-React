@@ -31,11 +31,11 @@ const MenuSection = (props)=> {
       
 
         <div id="Accordian-Header" className="heading bg-white flex justify-between" onClick={() => changeShow(index, show)}>
-          <h5 className="menu-heading inline-block m-[10px] mr-[100px] ml-0 font-bold">{`${title}`}</h5>
+          <h5 className="menu-heading inline-block m-[10px] ml-0 md:text-base text-sm font-bold">{`${title}`}</h5>
           <button className="menu-btn border-none m-0 p-0 bg-none text-inherit cursor-pointer outline-none" >{show? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown}/>}</button>
         </div>
         <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
-        {show && <div className="answer w-[680px] m-auto"> {categories.map((res, index) => {
+        {show && <div className="answer lg:w-[800px] md:w-[710px] sm:w-[470px] w-[285px] m-auto"> {categories.map((res, index) => {
            return <MenuSubSection key= {index} status = {props.status} response= {res} filter={filterbtn} id={id} resname={resName}/>
         })}
         
@@ -85,11 +85,11 @@ const MenuSection = (props)=> {
      
 
      <div id="Accordian-Header" className="heading bg-white flex justify-between" onClick={() => changeShow(index, show)}>
-      <h5 className="menu-heading inline-block m-[10px] mr-[100px] ml-0 font-bold">{`${title} (${filterbtn ? productList.length : itemCards.length})`}</h5>
+      <h5 className="menu-heading inline-block m-[10px] ml-0 md:text-base text-sm font-bold">{`${title} (${filterbtn ? productList.length : itemCards.length})`}</h5>
       <button className="menu-btn border-none m-0 p-0 bg-none text-inherit cursor-pointer outline-none" >{show? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown}/>}</button>
      </div>
      <div id="Accordian-body" className="menu-border w-[100%] h-[13px] bg-gray-100 mb-[15px] mt-[5px]"></div>
-       {show && <div className="answer w-[680px] m-auto">  {filterbtn ? (productList.map((res, index)=>{
+       {show && <div className="answer lg:w-[800px] md:w-[710px] sm:w-[470px] w-[285px] m-auto">  {filterbtn ? (productList.map((res, index)=>{
      return <MenuItems key= {index} status = {props.status} response = {res.card.info} id = {id} resname={resName}/>
    })) : (  itemCards.map((res, index)=>{
      return <MenuItems key= {index} status = {props.status} response = {res.card.info} id = {id} resname={resName}/>
