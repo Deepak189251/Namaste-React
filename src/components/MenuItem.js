@@ -12,6 +12,8 @@ import DiffRestaurant from "./DiffRestaurant";
 
 const MenuItems = (props) => {
    const {name, imageId, price, description, defaultPrice, isVeg, id} = props.response
+   const [screenWidth, setScreenWidth] = useState()
+   const [showmore, setShowmore] = useState(false)
    const dispatchnow = useDispatch()
    const [refresh, setRefresh] = useState()
    const [show, setShow] = useState(false)
@@ -20,7 +22,8 @@ const MenuItems = (props) => {
    console.log(description)
    let cleanedDescription
    description ? description?.search(/\xa0/) !== -1 ? cleanedDescription = description.replace(/\xa0/g, ' ') : cleanedDescription = description : cleanedDescription = " "
-   
+   const backupScreenWidth = window.innerWidth
+   const shortDescription = cleanedDescription?.length > 27 ? cleanedDescription.slice(0, 27) + '... ' : cleanedDescription
    //console.log(cleanedDescription)
    
    //const eligible = useSelector(store => store.user.cartItem)
@@ -130,31 +133,20 @@ const MenuItems = (props) => {
       
    }
 
-   const handleQuantity = () => {
-     /* const item = cart.filter((c) => c.id === id)
-      item[0].qty++
-      localStorage.setItem("userCart", [...JSON.stringify(cart), item])
-      setRefresh(!refresh)
-      const item = cart.findIndex((item) => item.id === id)
-      console.log(item)
-      setRefresh(!refresh)*/
-     /* const cart = JSON.parse(localStorage.getItem("userCart"))
-      const res = cart.find((item) => item?.id === id)
-      if(res){
-         res.qty++
-      }
-      localStorage.setItem("userCart", JSON.stringify(cart))
-      dispatchnow(addInCart(cart))
-      setRefresh(!refresh)*/
-      
-   }
-
-   //console.log(typeof cart)
   
  useEffect(() => {
+   function updateSize () {
+      setScreenWidth(window.innerWidth)
+   }
+   setScreenWidth(window.addEventListener( 'resize', updateSize) )
+   
+   return () => {
+      window.removeEventListener('resize', updateSize)
+   }
+   
+ }, [])
 
- }, [refresh])
-
+ console.log(screenWidth)
   
   //  let getQuantity = cart[0].qty
   //console.log(cart[0])
@@ -200,7 +192,7 @@ const MenuItems = (props) => {
       <p>{productIcon}</p>
       <h6 className="product-name md:text-base text-sm mb-[3px] md:font-bold font-semibold">{name}</h6>
       <p className="product-price pb-[10px] text-sm font-normal"> &#8377;{price?  price/100 :  defaultPrice/100}</p>
-      <h6 className="product-desc pr-2 text-xs font-medium">{cleanedDescription}</h6>
+      <h6 className="product-desc pr-2 text-xs font-medium">{screenWidth ? screenWidth < 520 && !showmore ? shortDescription : cleanedDescription : backupScreenWidth < 520 && !showmore ? shortDescription : cleanedDescription} { !showmore && <span className=" inline-block sm:hidden ml-[6px] text-gray-700 font-bold cursor-pointer" onClick={() => setShowmore(true)}>{"show more"}</span> } </h6>
     </div>
   <div className=" h-[100%]  ">
       
@@ -215,7 +207,7 @@ const MenuItems = (props) => {
          
          
          {cart?.some(p => p?.id === id) ? 
-        (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] md:right-[16px] right-[10px] w-[88px] text-green-600 font-medium  flex justify-between text-sm " onClick={handleQuantity}>
+        (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] md:right-[16px] right-[10px] w-[88px] text-green-600 font-medium  flex justify-between text-sm ">
             <div className="  cursor-pointer hover:bg-gray-300 rounded-s-md" onClick={decreaseQuantity}>
                <FontAwesomeIcon className="mx-[10px] my-[7px]" icon={faMinus} />
             </div>
