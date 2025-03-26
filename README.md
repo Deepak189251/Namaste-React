@@ -13,7 +13,7 @@ Due to the Swiggy API's strict origin policy, you may encounter CORS (Cross-Orig
 Please follow the steps below to install the CORS extension on your browser:
 
 #### For Chrome:
-1. Go to the [CORS Unblock Chrome Extension](https://chrome.google.com/webstore/detail/cors-unblock) page.
+1. Go to the [CORS Unblock Chrome Extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) page.
 2. Click on "Add to Chrome" and follow the installation prompts.
 3. Once installed, enable the extension by clicking its icon in the top-right corner of the browser and toggling it to "ON."
 
