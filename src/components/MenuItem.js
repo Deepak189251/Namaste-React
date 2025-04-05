@@ -208,13 +208,13 @@ const MenuItems = (props) => {
          
          {cart?.some(p => p?.id === id) ? 
         (<div className=" bg-white rounded-md text-center shadow-md absolute bottom-[-6px] md:right-[16px] right-[10px] w-[88px] text-green-600 font-medium  flex justify-between text-sm ">
-            <div className="  cursor-pointer hover:bg-gray-300 rounded-s-md" onClick={decreaseQuantity}>
+            <div className="  cursor-pointer hover:bg-gray-300 rounded-md" onClick={decreaseQuantity}>
                <FontAwesomeIcon className="mx-[10px] my-[7px]" icon={faMinus} />
             </div>
             <div className=" mx-[5px] my-[4px] font-semibold">
                {index[0]?.qty}
             </div>
-            <div className=" cursor-pointer hover:bg-gray-300 rounded-e-md" onClick={increaseQuantity}>
+            <div className=" cursor-pointer hover:bg-gray-300 rounded-md" onClick={increaseQuantity}>
                <FontAwesomeIcon className="mx-[10px] my-[7px]" icon={faPlus} />
             </div>
         </div>)
