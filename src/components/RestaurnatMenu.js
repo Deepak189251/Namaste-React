@@ -96,12 +96,12 @@ const RestaurantMenu = () => {
    // console.log(vegFilter)
 
     return(
-        <div className="res-menu w-[720px] text-left mx-auto mt-[55px]">
+        <div className="res-menu lg:w-[850px] md:w-[740px] sm:w-[500px] w-[310px] text-left mx-auto mt-[55px]">
           <div className="menu-header flex justify-between pb-4"> 
             <div className="header-details"> 
-              <h4 className="font-bold mb-2 text-lg">{name}</h4>
-              <p className=" text-xs">{cuisines.join(", ")}</p>
-              <p className=" text-xs"><span>{areaName}</span>, <span>{lastMileTravelString}</span></p>
+              <h4 className="font-bold mb-2 md:text-xl text-lg">{name}</h4>
+              <p className=" text-xs font-medium">{cuisines.join(", ")}</p>
+              <p className=" text-xs font-medium"><span>{areaName}</span>, <span>{lastMileTravelString}</span></p>
             </div>
             <div className="rating-info shadow-md rounded-md pt-[10px]">
                 <div className="avg-rating text-center pb-1">
