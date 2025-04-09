@@ -18,8 +18,8 @@ const SearchCard = ({data, type, resData}) => {
     const index = type && cart?.filter((item) => item.id === data.id)
 
     const dispatchnow = useDispatch()
-    console.log(data?.availability?.opened)
-    console.log(type && data.isVeg)
+    //console.log(data?.availability?.opened)
+    //console.log(type && data.isVeg)
     const increaseQuantity = () => {
       dispatchnow(increaseQty(data.id))
       setRefresh(!refresh)
@@ -74,7 +74,7 @@ const SearchCard = ({data, type, resData}) => {
     ? 
     
         <>
-            <div className=" w-[400px] bg-white mb-[15px] py-[20px] px-[15px] rounded-xl">
+            <div className=" lg:w-[400px] md:w-[340px] w-[400px] bg-white mb-[15px] py-[20px] px-[15px]  rounded-xl">
                 <Link to={`/restaurants/${resData.info.id}`}>
                     <div  className=" flex justify-between text-gray-600 mb-[15px]">
                         <div>
@@ -140,13 +140,13 @@ const SearchCard = ({data, type, resData}) => {
     
     :
         <Link to={`/restaurants/${data.id}`}>
-            <div className=" w-[400px] h-[150px] bg-white mb-[15px] py-[20px] px-[15px] flex">
+            <div className=" lg:w-[400px] md:w-[340px] sm:w-[400px] w-[290px] sm:h-[150px] h-[130px] bg-white mb-[15px] sm:py-[20px] py-[14px] sm:px-[15px] px-[5px] flex">
                 <div>
-                    <img alt="restruant_logo" className={` w-[90px] h-[95px] rounded-md ${data.availability.opened ? 'filter-none'  : 'filter grayscale'} `} src={restaurantLogoUrl + data.cloudinaryImageId}/>
+                    <img alt="restruant_logo" className={` sm:w-[90px] sm:h-[95px] h-[85px] w-[72px] rounded-md ${data.availability.opened ? 'filter-none'  : 'filter grayscale'} `} src={restaurantLogoUrl + data.cloudinaryImageId}/>
                 </div>
-                <div className=" ml-[10px] pt-[15px] ">
+                <div className=" ml-[10px] sm:pt-[15px] pt-[13px] ">
                     <div className=" mb-[3px]">
-                        <p className=" font-bold">{slicedName}</p>
+                        <p className=" font-bold sm:text-base text-sm">{slicedName}</p>
                     </div>
                     {data.availability.opened 
 
@@ -154,20 +154,20 @@ const SearchCard = ({data, type, resData}) => {
                     ? 
                         <>
                             <div className=" flex text-gray-600 mb-[3px]">
-                                <div className=" flex mr-[7px]">
+                                <div className=" flex sm:mr-[7px] mr-[5px]">
                                     <FontAwesomeIcon className=" w-[13px] h-[12px] mr-[4px] mt-[4px]" icon={faStar}/>
                                     <p className=" text-[13px] font-semibold">{data.avgRatingString}</p>
                                 </div>
-                                <FontAwesomeIcon className=" w-[3px] h-[3px] mt-[9px] mr-[7px]" icon={faCircle} />
+                                <FontAwesomeIcon className=" w-[3px] h-[3px] mt-[9px] sm:mr-[7px] mr-[5px]" icon={faCircle} />
                                 <p className=" text-[13px] font-semibold mr-[5px]">{data.sla.slaString}</p>
-                                <FontAwesomeIcon className=" w-[3px] h-[3px] mt-[9px] mr-[7px]" icon={faCircle} />
+                                <FontAwesomeIcon className=" w-[3px] h-[3px] mt-[9px] sm:mr-[7px] mr-[5px]" icon={faCircle} />
                                 <div className=" flex">
                                     <p className=" text-[13px] font-semibold mr-[3px]">{data.costForTwo / 100}</p>
                                     <p className=" text-[12px] font-semibold mt-[1px]">{"for two"}</p>
                                 </div>
                             </div>
                             <div className=" text-gray-500">
-                                <p className=" text-[14px]">{slicedCuisine}</p>
+                                <p className=" sm:text-[14px] text-[13px] font-medium">{slicedCuisine}</p>
                             </div>
                         </>
                     :

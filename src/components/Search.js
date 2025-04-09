@@ -16,12 +16,13 @@ const Search = () => {
     const location = JSON.parse(localStorage.getItem("userLocation"))
     const dispatch = useDispatch()
     const searchData = async (type) => { 
-        dispatch(removeSearchedDish())
+        
         const refinedText =   /[a-zA-Z]/.test(text.current.value)
         if(!refinedText) {
           setHasSearched(false)
           return
         }
+        dispatch(removeSearchedDish())
         setLoading(true)
         setHasSearched(true)
         try{
@@ -59,14 +60,14 @@ const Search = () => {
   
     const searchDish = () => {
       if(!searchedDish || searchedKeyword !== text.current.value){
-      if(!resultType){
-        searchData(true)
+        if(!resultType){
+          searchData(true)
+        }
+      }
+      else{
+      setResultType(true)
       }
     }
-    else{
-      setResultType(true)
-    }
-  }
     //const filteredData = resData?.cards ? resData?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Dish" || res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"  ) : false
     const filteredData = resultType ? searchedDish?.cards ? searchedDish?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Dish") : false : searchedRestaurant?.cards ? searchedRestaurant?.cards.filter((res) => res?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant") : false
     useEffect(() => {
@@ -75,12 +76,12 @@ const Search = () => {
     
   return (
     <div className=' pt-[30px]'>
-      <div className=' lg:w-[850px] w-[720px] mr-auto ml-auto '>
+      <div className=' lg:w-[850px] md:w-[720px] sm:w-[450px] w-[300px] mr-auto ml-auto '>
       <div className=' mb-[5px]'>
-        <form onSubmit={(e) => e.preventDefault()} className=' flex justify-between border-gray-400 border-1 h-[45px] rounded-md px-[15px] mb-[15px]'> 
-          <input type='text' ref={text} placeholder='Search for restaurants and food' className=' border-none outline-none placeholder:text-gray-500 placeholder:font-semibold font-semibold lg:w-[600px] w-[550px]'/>
-          <button type='submit' onClick={(() => searchData(false))} >
-            <FontAwesomeIcon icon={faMagnifyingGlass} color='grey' className=' w-[24px] h-[20px] mt-[6px]' />
+        <form onSubmit={(e) => e.preventDefault()} className=' flex justify-between border-gray-400 border-1 h-[45px] rounded-md mb-[15px]'> 
+          <input type='text' ref={text} placeholder='Search for restaurants and food' className=' border-none outline-none ml-[15px] placeholder:text-gray-500 placeholder:font-semibold font-semibold lg:w-[600px] md:w-[550px] sm:w-[360px] w-[210px]'/>
+          <button type='submit' onClick={(() => searchData(false))} className=" bg-orange-500 rounded-r-md ">
+            <FontAwesomeIcon icon={faMagnifyingGlass} color='white' className=' w-[24px] h-[20px] mt-[6px] mx-[15px]' />
           </button>
         </form>
         <div>
@@ -104,7 +105,7 @@ const Search = () => {
           <div>
             {
                filteredData ? 
-               <div className={` px-[15px] flex flex-wrap justify-between overflow-y-auto pt-[10px] h-[450px] ${filteredData ? "bg-gray-300 " : ' bg-inherit'} `}>
+               <div className={` md:px-[15px] sm:px-[25px] px-[5px] flex flex-wrap justify-between overflow-y-auto pt-[10px] h-[450px] ${filteredData ? "bg-gray-300 " : ' bg-inherit'} `}>
                { filteredData?.map(res => <SearchCard key={res?.id} type={resultType} data={res?.card?.card?.info} resData={resultType && res?.card?.card?.restaurant} />)}
                </div>
                 
