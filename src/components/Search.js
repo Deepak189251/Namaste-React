@@ -26,7 +26,7 @@ const Search = () => {
         setLoading(true)
         setHasSearched(true)
         try{
-          const data = await fetch(`https://www.swiggy.com/dapi/restaurants/search/v3?lat=${location?.lat}&lng=${location?.long}&str=${text.current.value}&trackingId=null&submitAction=ENTER&queryUniqueId=6d62ef22-3c39-2e69-e3f5-a0c948eece24&selectedPLTab=${type ? 'DISH' : 'RESTAURANT'}`)
+          const data = await fetch(`https://corsproxy.io/?url=https://www.swiggy.com/dapi/restaurants/search/v3?lat=${location?.lat}&lng=${location?.long}&str=${text.current.value}&trackingId=null&submitAction=ENTER&queryUniqueId=6d62ef22-3c39-2e69-e3f5-a0c948eece24&selectedPLTab=${type ? 'DISH' : 'RESTAURANT'}`)
           const json = await data.json()
           //setResData(type ? json?.data?.cards[0]?.groupedCard?.cardGroupMap?.DISH : json?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT)
           type ? dispatch(addSearchedDish(json?.data?.cards[0]?.groupedCard?.cardGroupMap?.DISH) ) : dispatch(addSearchedRestaurant(json?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT))
